@@ -187,7 +187,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSX/">JSX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VirtualDom/">VirtualDom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSX/">JSX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VirtualDom/">VirtualDom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组件化/">组件化</a></li></ul>
                     </div>
                 </section>
                 
@@ -295,9 +295,9 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="一：广丰简介"><a href="#一：广丰简介" class="headerlink" title="一：广丰简介"></a>一：广丰简介</h1><pre><code>广丰县坐落于江西省上饶市内，位于江西省东北部，是三省交汇之地，东临浙江省江山市，南接福建省浦城。广丰
-始建于唐朝，原称永丰，清雍正十年改称广丰。
-</code></pre>
+        <h1 id="一：广丰简介"><a href="#一：广丰简介" class="headerlink" title="一：广丰简介"></a>一：广丰简介</h1><hr>
+<p>&emsp;&emsp;广丰县坐落于江西省上饶市内，位于江西省东北部，是三省交汇之地，东临浙江省江山市，南接福建省浦城。广丰始建于唐朝，原称永丰，清雍正十年改称广丰。</p>
+
       
     </div>
     
@@ -395,7 +395,7 @@
 
 
   
-    <article id="testblog-react" class="article article-type-testblog" itemscope itemprop="blogPost">
+    <article id="post-react" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/08/18/react/" class="article-date">
@@ -424,8 +424,17 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="一：前沿"><a href="#一：前沿" class="headerlink" title="一：前沿"></a>一：前沿</h1><pre><code>2015年是React的天下，
-</code></pre>
+        <h1 id="前沿"><a href="#前沿" class="headerlink" title="前沿"></a>前沿</h1><p>&emsp;&emsp;2015年是React的兴起的初期，2016年则React的辉煌阶段，在github的star数已经超过了Angular，在前端已然是半边天的角色。对于前端工程师而言，不乱在实际项目生产中使用还是作为理论研究都具有非常重要的意义。<br>&emsp;&emsp;React是一个用于构建用户界面的Javascript库，和庞大全面的Angular相比，React只专注于架构中的V，即视图。React具有三大制胜法宝，在设计的时候从性能和编写等方面作出了详细的考虑，将这些总结成React的特性，分别为：</p>
+<pre><code>- JSX语法
+- 虚拟DOM
+- 组件化
+</code></pre><h1 id="为什么操作DOM很慢"><a href="#为什么操作DOM很慢" class="headerlink" title="为什么操作DOM很慢"></a>为什么操作DOM很慢</h1><p>&emsp;&emsp;React最出彩的地方就属性能了，因为它尽量让我们避免直接操作DOM，大家都知道在访问和操作DOM的时候是很费时的，代价相对来说比较大，那为什么这么说呢？</p>
+<h2 id="不仅要避免操作DOM，还要减少访问DOM的次数"><a href="#不仅要避免操作DOM，还要减少访问DOM的次数" class="headerlink" title="不仅要避免操作DOM，还要减少访问DOM的次数"></a>不仅要避免操作DOM，还要减少访问DOM的次数</h2><p> <img src="/img/jsdom.jpg" alt="/img/jsdon.jpg"></p>
+<blockquote>
+<p>把DOM和JavaScript各自想象成一个岛屿，它们之间用收费桥梁连接。<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  –《高性能JavaScript》</p>
+</blockquote>
+<p> &emsp;&emsp;<br>&emsp;&emsp;在浏览器中，DOM和JS的实现，用的并不是同一个“东西”。在Chrome中，JS引擎是V8，而DOM和渲染则是靠WebCore库，DOM和JS是两个独立的个体。而且js执行效率相对来说比较低，不想java和c++边编译边执行。</p>
+
       
     </div>
     
@@ -435,7 +444,7 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JSX/">JSX</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VirtualDom/">VirtualDom</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JSX/">JSX</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VirtualDom/">VirtualDom</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/组件化/">组件化</a></li></ul>
     </div>
 
       
