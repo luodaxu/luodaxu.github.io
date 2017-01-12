@@ -295,7 +295,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h4 id="实例化"><a href="#实例化" class="headerlink" title="实例化"></a>实例化</h4><p>a: 首次实例化</p>
+        <p><strong>（本文将持续更新）</strong></p>
+<h4 id="实例化-首次初始化调用getDefaultProps，以后实例化不会被调用，可以认为这是这个类的静态方法"><a href="#实例化-首次初始化调用getDefaultProps，以后实例化不会被调用，可以认为这是这个类的静态方法" class="headerlink" title="实例化: 首次初始化调用getDefaultProps，以后实例化不会被调用，可以认为这是这个类的静态方法"></a>实例化: 首次初始化调用getDefaultProps，以后实例化不会被调用，可以认为这是这个类的静态方法</h4><p>a: 首次实例化</p>
 <ul>
 <li>getDefaultProps</li>
 <li>getInitialState</li>
@@ -307,7 +308,25 @@
 <li>render</li>
 <li>componentDidMount</li>
 </ul>
-<h4 id="存在期"><a href="#存在期" class="headerlink" title="存在期"></a>存在期</h4>
+<h4 id="存在期：组件已经挂在时的状态改变"><a href="#存在期：组件已经挂在时的状态改变" class="headerlink" title="存在期：组件已经挂在时的状态改变"></a>存在期：组件已经挂在时的状态改变</h4><ul>
+<li>componentWillReceiveProps</li>
+<li>shouldComponentUpdate</li>
+<li>componentWillUpdate</li>
+<li>render</li>
+<li>componentDidUpdate</li>
+</ul>
+<h4 id="销毁期"><a href="#销毁期" class="headerlink" title="销毁期"></a>销毁期</h4><ul>
+<li>componentWillUnmount</li>
+</ul>
+<h4 id="10个生命周期API说明"><a href="#10个生命周期API说明" class="headerlink" title="10个生命周期API说明"></a>10个生命周期API说明</h4><ol>
+<li><p>getDefaultProps<br> 作用于组件类，只被调用一次，返回的对象设置默认的props，对于引用值将会被实例中共享。</p>
+</li>
+<li><p>getInitialState<br> 作用于组件的实例，在实例创建时调用一次，用于初始化每个实例的state，此时可以访问this.props。（注意反模式）</p>
+</li>
+<li><p>componentWillMount</p>
+<h1 id="未完待续"><a href="#未完待续" class="headerlink" title="未完待续"></a>未完待续</h1></li>
+</ol>
+
       
     </div>
     
