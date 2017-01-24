@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html >
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="罗旭" />
+
+
+
+<meta name="description" content="Sass是一门非常优秀的CSS预处理语言，他是由Hampton Catlin创立，其中他还有另外一个名称SCSS，这个SCSS看起来更像CSS。
+sass和compasssSass官方定义其为基于CSS的meta language。在我看来，其实Sass是CSS的一个超集，也是一个CSS开发工具。它丰富的语法知识使得CSS增加了诸多编程元素。Compass的定义是，它是一个开源的CSS编码框架。换">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sass之一:sass介绍">
+<meta property="og:url" content="http://yoursite.com/2017/01/20/sass之一-sass介绍/index.html">
+<meta property="og:site_name" content="罗旭个人博客">
+<meta property="og:description" content="Sass是一门非常优秀的CSS预处理语言，他是由Hampton Catlin创立，其中他还有另外一个名称SCSS，这个SCSS看起来更像CSS。
+sass和compasssSass官方定义其为基于CSS的meta language。在我看来，其实Sass是CSS的一个超集，也是一个CSS开发工具。它丰富的语法知识使得CSS增加了诸多编程元素。Compass的定义是，它是一个开源的CSS编码框架。换">
+<meta property="og:updated_time" content="2017-01-20T08:37:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sass之一:sass介绍">
+<meta name="twitter:description" content="Sass是一门非常优秀的CSS预处理语言，他是由Hampton Catlin创立，其中他还有另外一个名称SCSS，这个SCSS看起来更像CSS。
+sass和compasssSass官方定义其为基于CSS的meta language。在我看来，其实Sass是CSS的一个超集，也是一个CSS开发工具。它丰富的语法知识使得CSS增加了诸多编程元素。Compass的定义是，它是一个开源的CSS编码框架。换">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="罗旭个人博客" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>sass之一:sass介绍 | 罗旭个人博客</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/me.jpeg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">罗旭</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="/luox199111@gmail.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://www.github.com/luodaxu" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa 知乎" href="https://www.zhihu.com/people/xu-luo-47" title="知乎"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/">%</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSX/">JSX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Virtual-DOM/">Virtual DOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VirtualDom/">VirtualDom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/api/">api</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/async/">async</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/chrome/">chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css3/">css3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/defer/">defer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/extend/">extend</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html5/">html5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/image/">image</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/include/">include</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lasyman/">lasyman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/less/">less</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lifecycle/">lifecycle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mixin/">mixin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/placeholder/">placeholder</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/property/">property</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/props/">props</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/px-em-rem/">px|em|rem</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sass/">sass</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stateless/">stateless</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web优化/">web优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/嵩峰/">嵩峰</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/广丰/">广丰</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/江西/">江西</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组件化/">组件化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高阶组件/">高阶组件</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">后端 SSH2/Shiro, 前端 MKRN</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">罗旭</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/me.jpeg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">罗旭</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="/luox199111@gmail.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://www.github.com/luodaxu" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa 知乎" target="_blank" href="https://www.zhihu.com/people/xu-luo-47" title="知乎"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-sass之一-sass介绍" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/01/20/sass之一-sass介绍/" class="article-date">
+      <time datetime="2017-01-20T07:23:51.000Z" itemprop="datePublished">2017-01-20</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      sass之一:sass介绍
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/less/">less</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mixin/">mixin</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sass/">sass</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>Sass是一门非常优秀的CSS预处理语言，他是由Hampton Catlin创立，其中他还有另外一个名称SCSS，这个SCSS看起来更像CSS。</p>
+<h4 id="sass和compasss"><a href="#sass和compasss" class="headerlink" title="sass和compasss"></a>sass和compasss</h4><p>Sass官方定义其为基于CSS的meta language。在我看来，其实Sass是CSS的一个超集，也是一个CSS开发工具。它丰富的语法知识使得CSS增加了诸多编程元素。<br>Compass的定义是，它是一个开源的CSS编码框架。换句话说，它是一个基于Sass的框架。在我理解来，Compass就像是sass的一个库函数或者框架，提供了非常多的Sass的优秀模块、函数等。你可以选择不使用它，但是使用它会为你编写Sass文件带来非常大的便利之处，例如一些重用的CSS模块、一些非常流行的CSS栅格布局框架、我们常用的reset/normalizing等。</p>
+<h4 id="sass语法特征"><a href="#sass语法特征" class="headerlink" title="sass语法特征"></a>sass语法特征</h4><ol>
+<li>混合（Mixins）：class中的class;</li>
+<li>参数混合（Parametric）：可以像函数一样传递参数的class;</li>
+<li>嵌套规则（Nested Rules）：class中嵌套class，从而减少重复的代码；</li>
+<li>运算（Operations）：css中的数学计算；</li>
+<li>颜色功能（Color function）：可以编辑你的颜色；</li>
+<li>命名空间（Namespaces）：样式分组，从而方便被调用；</li>
+<li>作用域（Scope）：局部修改样式；</li>
+<li>JavaScript表达式(Javascript evaluation)：在CSS样式中使用Javascript表达式赋值。</li>
+</ol>
+<h4 id="sass语法特征介绍"><a href="#sass语法特征介绍" class="headerlink" title="sass语法特征介绍"></a>sass语法特征介绍</h4><ol>
+<li>Mixins: 译为混合或混入，将一个定义好的class A引入到另一个class B中，从而实现class B继承clas A的所有属性。</li>
+<li>Parametric： 带参数混合，像函数一样在class A定义一个参数的默认值，或者参数属性集合，还可以是@arguments变量，然后将定义好的class A引入class B中。</li>
+<li>Nested Rules译成嵌套规则，指的是在一个选择器中嵌套另一个选择器来实现继承。从而减少了代码量，并且增加了代码的可读性。著作权归作者所有。</li>
+<li>Operations运算，在CSS中使用加、减、乘、除进行数学运算，主要运用于属性值和颜色的运算，可以轻松实现属性值之间的复杂关系。</li>
+<li>Color function颜色功能，颜色的函数运算，颜色会先被转化成HSL色彩空间，然后在通道级别操作。著作权归作者所有。</li>
+<li>Namespaces命名空间，将一些变量或者混合模块打包封装，更好的组织CSS和属性集的重复使用；</li>
+<li>Scope作用域，先从本地查找变量或者混合模块，如果没有找到的话就会去父级作用域中查找，直到找到为止，这一点和其他程序语言的作域非常的相似；</li>
+<li>Javascript evaluation，javascript的表达式,在Less或sass文件中可以使用js的表达式,用来赋值。</li>
+</ol>
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><blockquote>
+<p>sudo gem install sass</p>
+</blockquote>
+<h4 id="sass使用"><a href="#sass使用" class="headerlink" title="sass使用"></a>sass使用</h4><ol>
+<li><p>继承 @extend<br>使用extend，一个类可以继承另外一个类的所有css属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">.class1 &#123;</div><div class="line">    border: 1px soild #ddd;</div><div class="line">&#125;</div><div class="line">.class2 &#123;</div><div class="line">    @extend .class1; // class2可以继承class1的css样式属性</div><div class="line">    font-size: 16px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>混合 @mixin/@include<br>在样式规则前面添加@mixin，规定是个嵌套，然后通过@include来调用.使用@mixin相对于定义一个函数一样，可带参数，@include类似函数调用，传入参数，<br>（1）不带参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">@mixin left &#123;</div><div class="line">    float: left;</div><div class="line">    margin-left: 10px;</div><div class="line">&#125;</div><div class="line">div &#123;</div><div class="line">    @include ;left;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>（2）带参数, 参数必须是$开头，可设置默认参数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">@mixin left($value: 10px) &#123;</div><div class="line">    float: left;</div><div class="line">    margin-left: $value;</div><div class="line">&#125;</div><div class="line">div &#123;</div><div class="line">　　@include left(20px);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>可使用mixin，用来生成浏览器前缀，（不推荐，推荐使用gulp/webpack+auprefixer）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@mixin rounded($vert, $horz, $radius: 10px) &#123;</div><div class="line">　　border-#&#123;$vert&#125;-#&#123;$horz&#125;-radius: $radius;</div><div class="line">　　-moz-border-radius-#&#123;$vert&#125;#&#123;$horz&#125;: $radius;</div><div class="line">　　-webkit-border-#&#123;$vert&#125;-#&#123;$horz&#125;-radius: $radius;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ol>
+<li><p>颜色函数<br>sass提供了一些内置的颜色函数，以便生成系列颜色。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">lighten(#cc3, 10%) // #d6d65c</div><div class="line">darken(#cc3, 10%) // #a3a329</div><div class="line">grayscale(#cc3) // #808080</div><div class="line">complement(#cc3) // #33c</div></pre></td></tr></table></figure>
+</li>
+<li><p>嵌套和导入<br>在css中一般使用class或者id，但是可能变得很乱，使用嵌套层次清晰.通过&amp;来引用当前元素，类似js中的this</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">.a &#123;</div><div class="line">    .aa &#123;</div><div class="line">        .aaaa&#123;</div><div class="line"></div><div class="line">        &#125;</div><div class="line">        &amp;:hover &#123;</div><div class="line"></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@import &apos;a.scss&apos;;</div></pre></td></tr></table></figure>
+</li>
+<li><p>运算<br>变量当然可以运算</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$base_margin: 10px;</div><div class="line">$double_margin: @base_margin * 2;</div><div class="line"></div><div class="line">$full_page: 960px;</div><div class="line">$half_page: $full_page / 2;</div><div class="line">$quarter_page: ($full_page / 2) / 2;</div></pre></td></tr></table></figure>
+</li>
+<li><p>条件语句<br>使用@if和@else来进行条件判断</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">p &#123;</div><div class="line">    @if fun($va)&gt;1 &#123;</div><div class="line">        background-color: #000;</div><div class="line">    &#125; @else &#123;</div><div class="line">        background-color: #fff;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>使用for语句进行循环<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@for $i from 1 to 10 &#123;</div><div class="line">    .border-#&#123;$i&#125; &#123;</div><div class="line">        border: #&#123;$i&#125;px soild #fff;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>也支持while循环：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$i: 6;</div><div class="line">@while $i &gt; 0 &#123;</div><div class="line">　　.item-#&#123;$i&#125; &#123; width: 2em * $i; &#125;</div><div class="line">　　$i: $i - 2;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>each命令，作用与for类似：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@each $member in a, b, c, d &#123;</div><div class="line">　　.#&#123;$member&#125; &#123;</div><div class="line">　　　　background-image: url(&quot;/image/#&#123;$member&#125;.jpg&quot;);</div><div class="line">　　&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ol>
+<li>自定义函数<br>sass允许自定义函数<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">@function double($n) &#123;</div><div class="line">　　@return $n * 2;</div><div class="line">&#125;</div><div class="line">#sidebar &#123;</div><div class="line">　　width: double(5px);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="sass四种编译风格"><a href="#sass四种编译风格" class="headerlink" title="sass四种编译风格"></a>sass四种编译风格</h4><p>四种风格分别是nested, expanded, compact, compressed<br>命令行是：</p>
+<blockquote>
+<p>  sass style expanded assets/sass/style1.sass assets/css/style1.css</p>
+</blockquote>
+<p>举个例子说明：</p>
+<ol>
+<li><p>nested:默认</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#main &#123;</div><div class="line">  color: #fff;</div><div class="line">  background-color: #000; &#125;</div><div class="line">  #main p &#123;</div><div class="line">    width: 10em; &#125;</div><div class="line"></div><div class="line">.huge &#123;</div><div class="line">  font-size: 10em;</div><div class="line">  font-weight: bold;</div><div class="line">  text-decoration: underline; &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>expanded</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">#main &#123;</div><div class="line">  color: #fff;</div><div class="line">  background-color: #000;</div><div class="line">&#125;</div><div class="line">#main p &#123;</div><div class="line">  width: 10em;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.huge &#123;</div><div class="line">  font-size: 10em;</div><div class="line">  font-weight: bold;</div><div class="line">  text-decoration: underline;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>compact</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#main &#123; color: #fff; background-color: #000; &#125;</div><div class="line">#main p &#123; width: 10em; &#125;</div><div class="line"></div><div class="line">.huge &#123; font-size: 10em; font-weight: bold; text-decoration: underline; &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>compressed</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#main&#123;color:#fff;background-color:#000&#125;#main p&#123;width:10em&#125;.huge&#123;font-size:10em;font-weight:bold;text-decoration:underline&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/01/20/sass之一-sass介绍/">sass之一:sass介绍</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">罗旭</a></p>
+        <p><span>发布时间:</span>2017-01-20, 15:23:51</p>
+        <p><span>最后更新:</span>2017-01-20, 16:37:55</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/01/20/sass之一-sass介绍/" title="sass之一:sass介绍">http://yoursite.com/2017/01/20/sass之一-sass介绍/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/01/20/sass之一-sass介绍/　　作者: 罗旭" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2017/01/20/sass之二-sass调试/">
+                    sass之二-sass调试
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/01/18/css-获取css属性/">
+                    css-获取css属性
+                </a>
+            </div>
+        
+    </nav>
+
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#sass和compasss"><span class="toc-number">1.</span> <span class="toc-text">sass和compasss</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sass语法特征"><span class="toc-number">2.</span> <span class="toc-text">sass语法特征</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sass语法特征介绍"><span class="toc-number">3.</span> <span class="toc-text">sass语法特征介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安装"><span class="toc-number">4.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sass使用"><span class="toc-number">5.</span> <span class="toc-text">sass使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sass四种编译风格"><span class="toc-number">6.</span> <span class="toc-text">sass四种编译风格</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"sass之一:sass介绍　| 罗旭个人博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/01/20/sass之一-sass介绍/" data-title="sass之一:sass介绍" data-url="http://yoursite.com/2017/01/20/sass之一-sass介绍/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"hexoluodaxu"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/01/20/sass之二-sass调试/" title="上一篇: sass之二-sass调试">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/01/18/css-获取css属性/" title="下一篇: css-获取css属性">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/01/23/react-高阶组件/">react-高阶组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/22/sass之四-mixin-include-placeholder-2/">sass之四-mixin-include-placeholder(2)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/21/web优化之css-sprites/">web优化之css sprites</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/20/sass之三-mixin-include-placeholder/">sass之三-mixin,include, %placeholder</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/20/sass之二-sass调试/">sass之二-sass调试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/20/sass之一-sass介绍/">sass之一:sass介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/18/css-获取css属性/">css-获取css属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/18/algorithm-LazyMan/">algorithm-LazyMan</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/18/javascript-defer和async/">javascript-defer和async</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/11/React生命周期/">React生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/11/React的四个概念/">React的四个概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/11/hexo常用命令/">hexo常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/13/css3-px-em-rem/">css3-px,em,rem</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/13/css3-placeholder/">css3-placeholder</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/22/广丰/">我的家乡－广丰</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/29/hello-world/">Hello, Welcome!</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/18/react/">React系列之一：初识React</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 罗旭
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

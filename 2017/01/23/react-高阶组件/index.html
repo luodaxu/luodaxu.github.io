@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html >
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="罗旭" />
+
+
+
+<meta name="description" content="目前的前端社区，推荐组件化，组件化又推荐组合而非继承，组合是业务和视图的组合，这样最小粒化组件，又不失去灵活性和可控性。mixin也是一种比较好的实践，但是自身自身的一些问题而慢慢不被推崇。高阶组件(Higher Order Comopnent, HOC)作为mixin之外的一种组件抽象与处理形式，自身有许多好处。高阶组件是一个非常棒的形式，它已经在多个 React 库中被证明了它的价值，本文将深">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react-高阶组件">
+<meta property="og:url" content="http://yoursite.com/2017/01/23/react-高阶组件/index.html">
+<meta property="og:site_name" content="罗旭个人博客">
+<meta property="og:description" content="目前的前端社区，推荐组件化，组件化又推荐组合而非继承，组合是业务和视图的组合，这样最小粒化组件，又不失去灵活性和可控性。mixin也是一种比较好的实践，但是自身自身的一些问题而慢慢不被推崇。高阶组件(Higher Order Comopnent, HOC)作为mixin之外的一种组件抽象与处理形式，自身有许多好处。高阶组件是一个非常棒的形式，它已经在多个 React 库中被证明了它的价值，本文将深">
+<meta property="og:updated_time" content="2017-01-23T10:14:43.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="react-高阶组件">
+<meta name="twitter:description" content="目前的前端社区，推荐组件化，组件化又推荐组合而非继承，组合是业务和视图的组合，这样最小粒化组件，又不失去灵活性和可控性。mixin也是一种比较好的实践，但是自身自身的一些问题而慢慢不被推崇。高阶组件(Higher Order Comopnent, HOC)作为mixin之外的一种组件抽象与处理形式，自身有许多好处。高阶组件是一个非常棒的形式，它已经在多个 React 库中被证明了它的价值，本文将深">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="罗旭个人博客" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>react-高阶组件 | 罗旭个人博客</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/me.jpeg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">罗旭</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="/luox199111@gmail.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://www.github.com/luodaxu" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa 知乎" href="https://www.zhihu.com/people/xu-luo-47" title="知乎"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/">%</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSX/">JSX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Virtual-DOM/">Virtual DOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VirtualDom/">VirtualDom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/api/">api</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/async/">async</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/chrome/">chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css3/">css3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/defer/">defer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/extend/">extend</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html5/">html5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/image/">image</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/include/">include</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lasyman/">lasyman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/less/">less</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lifecycle/">lifecycle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mixin/">mixin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/placeholder/">placeholder</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/property/">property</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/props/">props</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/px-em-rem/">px|em|rem</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sass/">sass</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stateless/">stateless</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web优化/">web优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/嵩峰/">嵩峰</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/广丰/">广丰</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/江西/">江西</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组件化/">组件化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高阶组件/">高阶组件</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">后端 SSH2/Shiro, 前端 MKRN</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">罗旭</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/me.jpeg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">罗旭</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="/luox199111@gmail.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://www.github.com/luodaxu" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa 知乎" target="_blank" href="https://www.zhihu.com/people/xu-luo-47" title="知乎"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-react-高阶组件" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/01/23/react-高阶组件/" class="article-date">
+      <time datetime="2017-01-23T06:04:59.000Z" itemprop="datePublished">2017-01-23</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      react-高阶组件
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/props/">props</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/stateless/">stateless</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/高阶组件/">高阶组件</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>目前的前端社区，推荐组件化，组件化又推荐组合而非继承，组合是业务和视图的组合，这样最小粒化组件，又不失去灵活性和可控性。mixin也是一种比较好的实践，但是自身自身的一些问题而慢慢不被推崇。高阶组件(Higher Order Comopnent, HOC)作为mixin之外的一种组件抽象与处理形式，自身有许多好处。高阶组件是一个非常棒的形式，它已经在多个 React 库中被证明了它的价值，本文将深入学习分析。<br>读者最好有React/ES6等基础知识。</p>
+<h4 id="什么是高阶组件"><a href="#什么是高阶组件" class="headerlink" title="什么是高阶组件"></a>什么是高阶组件</h4><blockquote>
+<p>一个高阶组件只是一个包装了另外一个React组件的React组件</p>
+</blockquote>
+<p>熟悉函数式编程的读者知道这可以被描述成一个函数，本质上是一个类工程(class factory)，这是我们再熟悉不过的一种设计模式。下方的函数标签伪代码启发来自Haskell，一种推荐函数式的编程语言。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hocFactory:: W: React.Comopnent =&gt; E: React.Comopnent</div></pre></td></tr></table></figure></p>
+<p>这里的W是 WrappedComponent缩写，指被包装的React.Comopnent，E是EnhancedCompnent的缩写，指的是包装最后返回的新的高阶React组件。<br>在这里中的<strong>包装</strong>指的是两件事，也就是两个功能。</p>
+<ol>
+<li>属性代理（Props Proxy）: 高阶组件操控传递给WrappedComponent的props</li>
+<li>反向继承（Inheritance Inversion）: 高阶组件继承（extends）WrappedComponent</li>
+</ol>
+<p>其实功能1就是 WrappedComponent将由通过EnhancedCompnent获取传递过来的props，例如是某些业务逻辑之类的。功能2就是最终返回的EnhancedCompnent通过这种方式继承(extends)了WrappedComponent的属性。</p>
+<h4 id="使用高阶组件做什么"><a href="#使用高阶组件做什么" class="headerlink" title="使用高阶组件做什么"></a>使用高阶组件做什么</h4><p>通过实践后高度概括，高阶组件可以实现下面功能：</p>
+<ul>
+<li>代码复用，逻辑抽象，抽离底层准备代码(bootstrap)代码</li>
+<li>渲染劫持</li>
+<li>State抽象和更改</li>
+<li>Props更改</li>
+</ul>
+<p>这些功能是高度概括的，下面通过学习一个高阶组件，学习 <strong>允许/限制</strong> 通过高阶组件我们可以实现哪些功能，如何做到代码的clean。</p>
+<h4 id="高阶组件工厂的实现"><a href="#高阶组件工厂的实现" class="headerlink" title="高阶组件工厂的实现"></a>高阶组件工厂的实现</h4><p>在这节中我们将学习两种主流的在 React 中实现高阶组件的方法：属性代理（Props Proxy）和 反向继承（Inheritance Inversion）。两种方法囊括了几种包装 WrappedComponent 的方法。</p>
+<h5 id="Props-Proxy-PP-属性代理"><a href="#Props-Proxy-PP-属性代理" class="headerlink" title="Props Proxy (PP) 属性代理"></a>Props Proxy (PP) 属性代理</h5><p>Props Proxy (PP) 属性代理可以理解为EnhancedCompnent替WrappedComponent接收传递过来的组件，最后的实际作用还是在WrappedComponent上，就相当于实现了一个代理一样。举个例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function ppHOC(WrappedComponent) &#123;</div><div class="line">    return class PP extends React.Component &#123;</div><div class="line">        render() &#123;</div><div class="line">            return &lt;WrappedComponent &#123;...this.props&#125; /&gt;;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>可以看到这里高阶组件的render方法返回了一个type为WrappedComponent的React Element，高阶组件接收到的props传递给它，因此得名 Props Proxy.</p>
+<h5 id="Props-Proxy功能"><a href="#Props-Proxy功能" class="headerlink" title="Props Proxy功能"></a>Props Proxy功能</h5><ol>
+<li>更改props</li>
+<li>通过refs获取组件实例</li>
+<li>抽象state</li>
+<li>把 WrappedComponent 与其它 elements 包装在一起</li>
+</ol>
+<p>（1）更改props<br>这个wrap的过程中我们可以对props进行<strong>读取/增加/修改/删除</strong>等操作将要递给WrappedComponent的props。<br>在修改或删除重要 props 的时候要小心，你可能应该给高阶组件的 props 指定命名空间（namespace），以防破坏从外传递给 WrappedComponent 的 props。<br>例如，添加新的props，这个应用目前登陆的一个用户可以在 WrappedComponent 通过 this.props.user 获取。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">function ppHOC(WrappedComponent) &#123;</div><div class="line">    return class PP extends React.Comopnent &#123;</div><div class="line">        render() &#123;</div><div class="line">            const newProps = &#123;  // 提供新的对象防止修改外部传递的props</div><div class="line">                user: currentLoggedInUser</div><div class="line">            &#125;;</div><div class="line">            return &lt;WrappedComponent &#123;..this.props&#125; &#123;...newProps&#125; /&gt;;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>（2）通过refs获取组件实例(Props Proxy with ref demonstration)<br>通过ref获取关键字 <strong>this</strong> (WrappedComponent的实例)，但是必须经历一次正常的渲染过程让ref得到计算，意味着可以在高阶组件的render方法中返回WrappedComponent,让React进行reconciliation过程这之后可以通过ref获取到这个WrappedComponent的实例。<br>例如下面例子就是通过ref获取WrappedComponent实例并调用实例方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">function refsHOC(WrappedComponent) &#123;</div><div class="line">    return class refsHOC extends React.Component &#123;</div><div class="line"></div><div class="line">        render() &#123;</div><div class="line">            const props = Object.assign(&#123;&#125;, this.props. &#123;ref: this.proc.bind(this)&#125;);</div><div class="line">            return &lt;WrappedComponent &#123;...props&#125;/&gt;;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当 WrappedComponent 被渲染后，ref 上的回调函数 proc 将会执行，此时就有了这个 WrappedComponent 的实例的引用。这个可以用来『读取，添加』实例的 props 或用来执行实例方法。<br>（3）抽象state<br>可以通过向WrappedComponent传递props和callbacks来抽象state。例如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">function ppHOC(WrappedComponent) &#123;</div><div class="line">    return class PP extends React.Component &#123;</div><div class="line">        constructor(props) &#123;</div><div class="line">            super(props);</div><div class="line">            this.state = &#123;</div><div class="line">                name: &apos;&apos;</div><div class="line">            &#125;;</div><div class="line">            this.onNameChange = this.onNameChange.bind(this);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        onNameChange(e) &#123;</div><div class="line">            this.setState(&#123;</div><div class="line">                name: e.target.value</div><div class="line">            &#125;);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        render() &#123;</div><div class="line">            const newProps = &#123;</div><div class="line">                name: &#123;</div><div class="line">                    value: this.state.name,</div><div class="line">                    onChange: this.onNameChange</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            return &lt;WrappedComponent &#123;...this.props&#125; &#123;...newProps&#125;/&gt;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">@ppHOC</div><div class="line">class Example extends React.Comopnent &#123;</div><div class="line">    render() &#123;</div><div class="line">        return &lt;input name=&quot;name&quot; &#123;...this.props.name&#125;/&gt;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>此时的input是一个可控的input。<br>（4）把WrappedComponent与其他elements包装在一起<br>出于操作样式、布局或其它目的，你可以将 WrappedComponent 与其它组件包装在一起。一些基本的用法也可以使用正常的父组件来实现（附录 B），但是就像之前所描述的，使用高阶组件你可以获得更多的灵活性。<br>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">function ppHOC(WrappedComponent) &#123;</div><div class="line">    return class PP extends React.Component &#123;</div><div class="line">        return (</div><div class="line">            &lt;div style=&#123;&#123;display: &apos;block&apos;&#125;&#125;&gt;</div><div class="line">                &lt;WrappedComponent &#123;this.props&#125; /&gt;</div><div class="line">            /div&gt;</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="反向继承-Inheritance-Inversion"><a href="#反向继承-Inheritance-Inversion" class="headerlink" title="反向继承(Inheritance Inversion)"></a>反向继承(Inheritance Inversion)</h4><p>反向继承一个简单的实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function iiHOC(WrappedComponent) &#123;</div><div class="line">    return class Enhancer extends WrappedComponent &#123;</div><div class="line">        render() &#123;</div><div class="line">            return super.render();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>返回的高阶组件类（Enhancer）继承了WrappedComponent，之所以称之为反向继承是因为WrappedComponent被动地被Enhancer继承，而不是 WrappedComponent 去继承 Enhancer。通过这种方式他们之间的关系倒转了。<br>反向继承允许高阶组件通过 this 关键词获取 WrappedComponent，意味着它可以获取到 state，props，组件生命周期（component lifecycle）钩子，以及渲染方法（render）。<br>是请注意，你可以通过高阶组件来给 WrappedComponent 创建新的生命周期挂钩方法，别忘了调用 super.[lifecycleHook] 防止破坏 WrappedComponent。</p>
+<h5 id="React-Reconciliation-过程"><a href="#React-Reconciliation-过程" class="headerlink" title="React Reconciliation 过程"></a>React Reconciliation 过程</h5><p>React Element在react执行它的reconciliation过程描述什么将被渲染，React Element可以分为两类：String或Function。String 类型的 React Element 代表原声 DOM 节点，Function 类型的 React Element 代表通过 React.Component 创建的组件<br>Function 类型的 React Element 将在 reconciliation 阶段被解析成 DOM 类型的 React Element （最终结果一定都是 DOM 元素）。<br>这点非常重要，这意味<strong>反向继承的高阶组件不保证一定解析整个子元素树</strong>。这对渲染劫持非常重要。</p>
+<h5 id="可以用反向继承高阶组件做什么？"><a href="#可以用反向继承高阶组件做什么？" class="headerlink" title="可以用反向继承高阶组件做什么？"></a>可以用反向继承高阶组件做什么？</h5><ul>
+<li>渲染劫持 Rendering Highjacking</li>
+<li>操作state</li>
+</ul>
+<ol>
+<li>渲染劫持<br>之所以被称为渲染劫持是因为高阶组件控制了WrappedComponent生成的渲染结果，并且可以各种操作。通过渲染劫持可以：<ul>
+<li>读取，添加，删除，修改 任何一个将被渲染的React Element的 props</li>
+<li>在渲染方法中读取或更改React Element tree，也就是 WrappedComponent 的 children</li>
+<li>根据条件不同，选择性的渲染子树</li>
+<li>给子树里的元素变更样式<br>其中渲染指的是 WrappedComponent.render 方法<blockquote>
+<p>无法更改或创建 props 给 WrappedComponent 实例，因为 React 不允许变更一个组件收到的 props，但是你可以在 render 方法里更改子元素/子组件们的 props。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ol>
+<p>反向继承的高阶组件不保证一定渲染整个子元素树，这同时也给渲染劫持添加了一些限制。通过反向继承，只能劫持WrappedComponent渲染的元素，这意味着如果 WrappedComponent 的子元素里有 Function 类型的 React Element，你不能劫持这个元素里面的子元素树的渲染<br>例子:通过 render 来变成 React Elements tree 的结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">function iiHOC(WrappedComponent) &#123;</div><div class="line">  return class Enhancer extends WrappedComponent &#123;</div><div class="line">    render() &#123;</div><div class="line">      const elementsTree = super.render()</div><div class="line">      let newProps = &#123;&#125;;</div><div class="line">      if (elementsTree &amp;&amp; elementsTree.type === &apos;input&apos;) &#123;</div><div class="line">        newProps = &#123;value: &apos;may the force be with you&apos;&#125;</div><div class="line">      &#125;</div><div class="line">      const props = Object.assign(&#123;&#125;, elementsTree.props, newProps)</div><div class="line">      const newElementsTree = React.cloneElement(elementsTree, props, elementsTree.props.children)</div><div class="line">      return newElementsTree</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这里你可以做任何操作，比如你可以遍历整个 element tree 然后变更某些元素的 props。这恰好就是 Radium 的工作方式。</p>
+<blockquote>
+<p>注意：你不能通过 Props Proxy 来做渲染劫持.<br>即使你可以通过 WrappedComponent.prototype.render 获取它的 render 方法，你需要自己手动模拟整个实例以及生命周期方法，而不是依靠 React，这是不值当的，应该使用反向继承来做到渲染劫持。要记住 React 在内部处理组件的实例，而你只通过 this 或 refs 来处理实例。</p>
+</blockquote>
+<h4 id="引用博客"><a href="#引用博客" class="headerlink" title="引用博客"></a>引用博客</h4><ol>
+<li>基于Decorator的组件扩展实践, <a href="https://zhuanlan.zhihu.com/p/22054582?refer=purerender" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/22054582?refer=purerender</a></li>
+<li>深入理解 React 高阶组件， <a href="http://www.jianshu.com/p/0aae7d4d9bc1" target="_blank" rel="external">http://www.jianshu.com/p/0aae7d4d9bc1</a></li>
+</ol>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/01/23/react-高阶组件/">react-高阶组件</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">罗旭</a></p>
+        <p><span>发布时间:</span>2017-01-23, 14:04:59</p>
+        <p><span>最后更新:</span>2017-01-23, 18:14:43</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/01/23/react-高阶组件/" title="react-高阶组件">http://yoursite.com/2017/01/23/react-高阶组件/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/01/23/react-高阶组件/　　作者: 罗旭" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/01/22/sass之四-mixin-include-placeholder-2/">
+                    sass之四-mixin-include-placeholder(2)
+                </a>
+            </div>
+        
+    </nav>
+
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是高阶组件"><span class="toc-number">1.</span> <span class="toc-text">什么是高阶组件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用高阶组件做什么"><span class="toc-number">2.</span> <span class="toc-text">使用高阶组件做什么</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#高阶组件工厂的实现"><span class="toc-number">3.</span> <span class="toc-text">高阶组件工厂的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Props-Proxy-PP-属性代理"><span class="toc-number">3.1.</span> <span class="toc-text">Props Proxy (PP) 属性代理</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Props-Proxy功能"><span class="toc-number">3.2.</span> <span class="toc-text">Props Proxy功能</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#反向继承-Inheritance-Inversion"><span class="toc-number">4.</span> <span class="toc-text">反向继承(Inheritance Inversion)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#React-Reconciliation-过程"><span class="toc-number">4.1.</span> <span class="toc-text">React Reconciliation 过程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#可以用反向继承高阶组件做什么？"><span class="toc-number">4.2.</span> <span class="toc-text">可以用反向继承高阶组件做什么？</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引用博客"><span class="toc-number">5.</span> <span class="toc-text">引用博客</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"react-高阶组件　| 罗旭个人博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/01/23/react-高阶组件/" data-title="react-高阶组件" data-url="http://yoursite.com/2017/01/23/react-高阶组件/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"hexoluodaxu"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/01/22/sass之四-mixin-include-placeholder-2/" title="下一篇: sass之四-mixin-include-placeholder(2)">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/01/23/react-高阶组件/">react-高阶组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/22/sass之四-mixin-include-placeholder-2/">sass之四-mixin-include-placeholder(2)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/21/web优化之css-sprites/">web优化之css sprites</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/20/sass之三-mixin-include-placeholder/">sass之三-mixin,include, %placeholder</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/20/sass之二-sass调试/">sass之二-sass调试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/20/sass之一-sass介绍/">sass之一:sass介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/18/css-获取css属性/">css-获取css属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/18/algorithm-LazyMan/">algorithm-LazyMan</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/18/javascript-defer和async/">javascript-defer和async</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/11/React生命周期/">React生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/11/React的四个概念/">React的四个概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/11/hexo常用命令/">hexo常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/13/css3-px-em-rem/">css3-px,em,rem</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/13/css3-placeholder/">css3-placeholder</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/22/广丰/">我的家乡－广丰</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/29/hello-world/">Hello, Welcome!</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/18/react/">React系列之一：初识React</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 罗旭
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

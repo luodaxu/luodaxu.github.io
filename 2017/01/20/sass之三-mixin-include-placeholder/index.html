@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html >
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="罗旭" />
+
+
+
+<meta name="description" content="这节将讲解sass四个特性: 变量variables，嵌套nesting，混合mixins, 继承extend.
+继承继承相对简单，这里不做讲解
+mixinsmixins相当于函数功能，函数功能就是减少代码量，提取出来作为公共模块被调用，可以通过@include进行调用。定义123@mixin 名称( 参数: 默认值) &amp;#123;    /* 公共样式 */&amp;#125;
+调用123selecto">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sass之三-mixin,include, %placeholder">
+<meta property="og:url" content="http://yoursite.com/2017/01/20/sass之三-mixin-include-placeholder/index.html">
+<meta property="og:site_name" content="罗旭个人博客">
+<meta property="og:description" content="这节将讲解sass四个特性: 变量variables，嵌套nesting，混合mixins, 继承extend.
+继承继承相对简单，这里不做讲解
+mixinsmixins相当于函数功能，函数功能就是减少代码量，提取出来作为公共模块被调用，可以通过@include进行调用。定义123@mixin 名称( 参数: 默认值) &amp;#123;    /* 公共样式 */&amp;#125;
+调用123selecto">
+<meta property="og:updated_time" content="2017-01-22T10:13:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sass之三-mixin,include, %placeholder">
+<meta name="twitter:description" content="这节将讲解sass四个特性: 变量variables，嵌套nesting，混合mixins, 继承extend.
+继承继承相对简单，这里不做讲解
+mixinsmixins相当于函数功能，函数功能就是减少代码量，提取出来作为公共模块被调用，可以通过@include进行调用。定义123@mixin 名称( 参数: 默认值) &amp;#123;    /* 公共样式 */&amp;#125;
+调用123selecto">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="罗旭个人博客" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>sass之三-mixin,include, %placeholder | 罗旭个人博客</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/me.jpeg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">罗旭</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="/luox199111@gmail.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://www.github.com/luodaxu" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa 知乎" href="https://www.zhihu.com/people/xu-luo-47" title="知乎"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/">%</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSX/">JSX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Virtual-DOM/">Virtual DOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VirtualDom/">VirtualDom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/api/">api</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/async/">async</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/chrome/">chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css3/">css3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/defer/">defer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/extend/">extend</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html5/">html5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/image/">image</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/include/">include</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lasyman/">lasyman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/less/">less</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lifecycle/">lifecycle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mixin/">mixin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/placeholder/">placeholder</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/property/">property</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/props/">props</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/px-em-rem/">px|em|rem</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sass/">sass</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stateless/">stateless</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web优化/">web优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/嵩峰/">嵩峰</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/广丰/">广丰</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/江西/">江西</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组件化/">组件化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高阶组件/">高阶组件</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">后端 SSH2/Shiro, 前端 MKRN</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">罗旭</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/me.jpeg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">罗旭</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="/luox199111@gmail.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://www.github.com/luodaxu" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa 知乎" target="_blank" href="https://www.zhihu.com/people/xu-luo-47" title="知乎"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-sass之三-mixin-include-placeholder" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/01/20/sass之三-mixin-include-placeholder/" class="article-date">
+      <time datetime="2017-01-20T09:30:19.000Z" itemprop="datePublished">2017-01-20</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      sass之三-mixin,include, %placeholder
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/include/">include</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mixin/">mixin</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sass/">sass</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>这节将讲解sass四个特性: 变量variables，嵌套nesting，混合mixins, 继承extend.</p>
+<h4 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h4><p>继承相对简单，这里不做讲解</p>
+<h4 id="mixins"><a href="#mixins" class="headerlink" title="mixins"></a>mixins</h4><p>mixins相当于函数功能，函数功能就是减少代码量，提取出来作为公共模块被调用，可以通过@include进行调用。<br>定义<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">@mixin 名称( 参数: 默认值) &#123;</div><div class="line">    /* 公共样式 */</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>调用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">selector &#123;</div><div class="line">    @include 名称(参数值);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>mixins最明显的用例是来处理浏览器前缀的问题</p>
+<h4 id="sass中嵌套，混合和继承的缺点"><a href="#sass中嵌套，混合和继承的缺点" class="headerlink" title="sass中嵌套，混合和继承的缺点"></a>sass中嵌套，混合和继承的缺点</h4><ol>
+<li>嵌套的缺点<br>SASS嵌套让我们在写代码的时候，不再需要考虑如何嵌套，如何添加类或者ID。简单来说，知道了父元素，其后代元素<br>都可以很清晰的控制，但生成的css选择器层级越深，一般而言，查询的就越慢，影响页面的性能，一般是2-3层为最佳。</li>
+<li>混合的缺点<br>虽然Mixins能帮助我们把相同的样式通过@mixin来定义成一个模块，在需要的时候调用。然而混合在生成的CSS代码中也存在一个潜在的不足，而且很多初学者都将Mixins用在错误的地方。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">// define @mixin rounded</div><div class="line">@mixin rounded &#123;</div><div class="line">  -webkit-border-radius: 5px;</div><div class="line">  -moz-border-radius: 5px;</div><div class="line">  -o-border-radius: 5px;</div><div class="line">  -ms-border-radius: 5px;</div><div class="line">  border-radius: 5px;</div><div class="line">&#125;</div><div class="line"></div><div class="line">button &#123;</div><div class="line">  @include rounded;</div><div class="line">  background: #ccc;</div><div class="line">  color: #222;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.simple-form input &#123;</div><div class="line">  @include rounded;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.main-nav .item &#123;</div><div class="line">  color: #fff;</div><div class="line">  a:hover,</div><div class="line">  a:active &#123;</div><div class="line">    @include rounded;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>但是编译后的结果是这样子的，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">button &#123;</div><div class="line">  -webkit-border-radius: 5px;</div><div class="line">  -moz-border-radius: 5px;</div><div class="line">  -o-border-radius: 5px;</div><div class="line">  -ms-border-radius: 5px;</div><div class="line">  border-radius: 5px;</div><div class="line">  background: #ccc;</div><div class="line">  color: #222; &#125;</div><div class="line"></div><div class="line">.simple-form input &#123;</div><div class="line">  -webkit-border-radius: 5px;</div><div class="line">  -moz-border-radius: 5px;</div><div class="line">  -o-border-radius: 5px;</div><div class="line">  -ms-border-radius: 5px;</div><div class="line">  border-radius: 5px; &#125;</div><div class="line"></div><div class="line">.main-nav .item &#123;</div><div class="line">  color: #fff; &#125;</div><div class="line">  .main-nav .item a:hover,</div><div class="line">  .main-nav .item a:active &#123;</div><div class="line">    -webkit-border-radius: 5px;</div><div class="line">    -moz-border-radius: 5px;</div><div class="line">    -o-border-radius: 5px;</div><div class="line">    -ms-border-radius: 5px;</div><div class="line">    border-radius: 5px; &#125;</div></pre></td></tr></table></figure></p>
+<p>这样一来，@mixin rounded中定义的样式被重复的编译出来，不但没有变的简洁，反而变得臃肿，这样是不是感觉没有什么用？理想的是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">button,</div><div class="line">.simple-form input,</div><div class="line">.main-nav .item a:hover, .main-nav .item a:active &#123;</div><div class="line">    -webkit-border-radius: 5px;</div><div class="line">    -moz-border-radius: 5px;</div><div class="line">    -o-border-radius: 5px;</div><div class="line">    -ms-border-radius: 5px;</div><div class="line">    border-radius: 5px; &#125;</div></pre></td></tr></table></figure></p>
+<p>那该如何正确的使用@mixins呢？<br>Mixins的黄金规则是将相似的风格定义在一个@mixin中。请注意这里的一个关键词相似的，另外Mixins主要是用于重用，而不是用来指定具体的属性值。例如这个实例，我们应该用@mxin来创建不同半径的圆角，而不是用来创建一个具体值的@mixin。换句话来说，如果你创建的Mixins没有传参数，那您就是一种错误的使用方法。基于这点出发，我们可以把上例中的@mixin rounded传入一个$radius参数：著作权归作者所有。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// define @mixin rounded</div><div class="line">@mixin rounded($radius: 5px) &#123;</div><div class="line">  -webkit-border-radius: 5px;</div><div class="line">  -moz-border-radius: 5px;</div><div class="line">  -o-border-radius: 5px;</div><div class="line">  -ms-border-radius: 5px;</div><div class="line">  border-radius: 5px;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这样结果变成更加简洁明了了。</p>
+<ol>
+<li>继承的缺点<br>前面说过，SASS的继承，可以将相同样式规则定义在一个类中，然后能过@extend来调用。这样就可以把相同样式合并在一起。按照这个原理，我们可以把上面的@mixin rounded替换成.rounded，然后在需要的地方通过@extend来调用.rounded。这样就可以解决使用@mixin致使样式重复出现多次的问题。<br>但是.rounded样式可能不只运用在一个地方或者一个样式文件之中。另外，@extend是可以读取SASS文件中类名，这可能之后会出现很大问题。举个例子：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">.button &#123;</div><div class="line">  display: block;</div><div class="line">  padding: 10px;</div><div class="line">  background: green;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.sidebar .signup .button &#123;</div><div class="line">  margin-top: 20px;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.registrantion,</div><div class="line">.remember-password &#123;</div><div class="line">  .button &#123;</div><div class="line">    margin-bottom: 33px;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.edit-account .delete-area .button &#123;</div><div class="line">  background-color: red;</div><div class="line">  color: white;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.article a &#123;</div><div class="line">  @extend .button;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>最终编译出来的结果是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">.button, .article a &#123;</div><div class="line">  display: block;</div><div class="line">  padding: 10px;</div><div class="line">  background: green; &#125;</div><div class="line"></div><div class="line">.sidebar .signup .button,</div><div class="line">.sidebar .signup .article a,</div><div class="line">.article .sidebar .signup a &#123;</div><div class="line">  margin-top: 20px; &#125;</div><div class="line"></div><div class="line">.registrantion .button,</div><div class="line">.registrantion .article a,</div><div class="line">.article .registrantion a,</div><div class="line">.remember-password .button,</div><div class="line">.remember-password .article a,</div><div class="line">.article .remember-password a &#123;</div><div class="line">  margin-bottom: 33px; &#125;</div><div class="line"></div><div class="line">.edit-account .delete-area .button,</div><div class="line">.edit-account .delete-area .article a,</div><div class="line">.article .edit-account .delete-area a &#123;</div><div class="line">  background-color: red;</div><div class="line">  color: white; &#125;</div></pre></td></tr></table></figure></p>
+<p>出乎意料，我们期望的是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">.button, .article a &#123;</div><div class="line">    display: block;</div><div class="line">    padding: 10px;</div><div class="line">    background: green;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>.button</strong> 类名可能用在不同之处，有不同的容器包裹着，然而在SASS中的<strong>@extend</strong> 无法判断引用哪个地方的 <strong>.button</strong>,所以自己做主将不同地方出现的.button类名有引入进来，造成了上述现象。那怎么办？使用％placeholders</p>
+<h4 id="强大的"><a href="#强大的" class="headerlink" title="强大的%"></a>强大的%</h4><p>%只是一个占位符，不是正常的选择器，只要不通过@extend调用，是不会产生任何代码量的，这个功能用来取代上述的.class与@extend完美简单。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">％placeholders &#123; /* 共用样式 */ &#125;</div></pre></td></tr></table></figure></p>
+<p>在需要的时候通过@extend调用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">selector &#123;</div><div class="line">    @extend %placeholders;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们举个例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">%clearfix &#123;</div><div class="line">    *zoom: 1;</div><div class="line"></div><div class="line">    &amp;::after,</div><div class="line">    &amp;::before &#123;</div><div class="line">        content: &quot;&quot;,</div><div class="line">        display: table;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    &amp;::after &#123;</div><div class="line">        clear: both;</div><div class="line">        overflow: hidden;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>调用的时候：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">nav &#123;</div><div class="line">    display: block;</div><div class="line">    ul &#123;</div><div class="line">        margin: 50px auto;</div><div class="line">        width: 800px;</div><div class="line">        @extend %clearfix;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="引用博客"><a href="#引用博客" class="headerlink" title="引用博客"></a>引用博客</h4><p><a href="http://www.w3cplus.com/preprocessor/sass-basic-mixins-nesting-placeholders-extend.html" target="_blank" rel="external">http://www.w3cplus.com/preprocessor/sass-basic-mixins-nesting-placeholders-extend.html</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/01/20/sass之三-mixin-include-placeholder/">sass之三-mixin,include, %placeholder</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">罗旭</a></p>
+        <p><span>发布时间:</span>2017-01-20, 17:30:19</p>
+        <p><span>最后更新:</span>2017-01-22, 18:13:26</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/01/20/sass之三-mixin-include-placeholder/" title="sass之三-mixin,include, %placeholder">http://yoursite.com/2017/01/20/sass之三-mixin-include-placeholder/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/01/20/sass之三-mixin-include-placeholder/　　作者: 罗旭" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2017/01/21/web优化之css-sprites/">
+                    web优化之css sprites
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/01/20/sass之二-sass调试/">
+                    sass之二-sass调试
+                </a>
+            </div>
+        
+    </nav>
+
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#继承"><span class="toc-number">1.</span> <span class="toc-text">继承</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mixins"><span class="toc-number">2.</span> <span class="toc-text">mixins</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sass中嵌套，混合和继承的缺点"><span class="toc-number">3.</span> <span class="toc-text">sass中嵌套，混合和继承的缺点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#强大的"><span class="toc-number">4.</span> <span class="toc-text">强大的%</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引用博客"><span class="toc-number">5.</span> <span class="toc-text">引用博客</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"sass之三-mixin,include, %placeholder　| 罗旭个人博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/01/20/sass之三-mixin-include-placeholder/" data-title="sass之三-mixin,include, %placeholder" data-url="http://yoursite.com/2017/01/20/sass之三-mixin-include-placeholder/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"hexoluodaxu"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/01/21/web优化之css-sprites/" title="上一篇: web优化之css sprites">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/01/20/sass之二-sass调试/" title="下一篇: sass之二-sass调试">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/01/23/react-高阶组件/">react-高阶组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/22/sass之四-mixin-include-placeholder-2/">sass之四-mixin-include-placeholder(2)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/21/web优化之css-sprites/">web优化之css sprites</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/20/sass之三-mixin-include-placeholder/">sass之三-mixin,include, %placeholder</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/20/sass之二-sass调试/">sass之二-sass调试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/20/sass之一-sass介绍/">sass之一:sass介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/18/css-获取css属性/">css-获取css属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/18/algorithm-LazyMan/">algorithm-LazyMan</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/18/javascript-defer和async/">javascript-defer和async</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/11/React生命周期/">React生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/11/React的四个概念/">React的四个概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/11/hexo常用命令/">hexo常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/13/css3-px-em-rem/">css3-px,em,rem</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/13/css3-placeholder/">css3-placeholder</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/22/广丰/">我的家乡－广丰</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/29/hello-world/">Hello, Welcome!</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/18/react/">React系列之一：初识React</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 罗旭
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
