@@ -266,6 +266,78 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-javascript-defer和async" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/01/18/javascript-defer和async/" class="article-date">
+      <time datetime="2017-01-18T05:50:19.000Z" itemprop="datePublished">2017-01-18</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/18/javascript-defer和async/">javascript-defer和async</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h4 id="javascript加载和执行"><a href="#javascript加载和执行" class="headerlink" title="javascript加载和执行"></a>javascript加载和执行</h4><p>javascript在浏览器中分为加载和执行两个过程，当浏览器碰到script脚本时候，分为以下情况：</p>
+<ol>
+<li>&lt;script src=”index.js”&gt;&lt;/script&gt;没有defer或async，浏览器会立即加载并执行指定的脚本，立即指的是在渲染该script标签下的文档元素之前，也就是说不等待后续载入的文档元素，读到就加载并执行。</li>
+<li>&lt;script async src=”index.js”&gt;&lt;/script&gt;有async，加载和渲染后续文档的过程将和script.js的加载和执行并行进行（移步）。</li>
+<li>&lt;script async src=”index.js”&gt;&lt;/script&gt;有defer，加载后续文档元素的过程将和 script.js 的加载并行进行（异步），但是 script.js 的执行要在所有元素解析完成之后，DOMContentLoaded 事件触发之前完成。<br>然后从实用角度来说呢，首先把所有脚本都丢到  之前是最佳实践，因为对于旧浏览器来说这是唯一的优化选择，此法可保证非脚本的其他一切元素能够以最快的速度得到加载和解析。<br>接着，我们来看一张图咯：<br><img src="/img/script.jpeg" alt=""><br>蓝色线代表网络读取，红色线代表执行时间，这俩都是针对脚本的；绿色线代表 HTML 解析。</li>
+</ol>
+<h4 id="几点注意事项"><a href="#几点注意事项" class="headerlink" title="几点注意事项"></a>几点注意事项</h4><p>1、不要在defer型的脚本程序段中调用document.write命令，因为document.write将产生直接输出效果。</p>
+<p>2、而且，不要在defer型脚本程序段中包括任何立即执行脚本要使用的全局变量或者函数。</p>
+<p>3、defer 和 async 在网络读取（下载）这块儿是一样的，都是异步的（相较于 HTML 解析）。</p>
+<p>4、它俩的差别在于脚本下载完之后何时执行，显然 defer 是最接近我们对于应用脚本加载和执行的要求的。</p>
+<p>5、关于 defer，此图未尽之处在于它是按照加载顺序执行脚本的，这一点要善加利用。</p>
+<p>6、async 则是一个乱序执行的主，反正对它来说脚本的加载和执行是紧紧挨着的，所以不管你声明的顺序如何，只要它加载完了就会立刻执行。</p>
+<p>7、仔细想想，async 对于应用脚本的用处不大，因为它完全不考虑依赖（哪怕是最低级的顺序执行），不过它对于那些可以不依赖任何脚本或不被任何脚本依赖的脚本来说却是非常合适的。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/async/">async</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/defer/">defer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web优化/">web优化</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-React生命周期" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
