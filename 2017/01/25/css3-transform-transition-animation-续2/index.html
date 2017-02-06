@@ -15,22 +15,16 @@
 
 
 
-<meta name="description" content="transition定义：css的transition允许css的属性值在一定的时间区间内平滑地过度，这种效果可以在鼠标单击、获得焦点、被点击或对元素任何改变中触发，并圆滑地以动画效果改变CSS的属性值。属性值:
-
- transition ： [&amp;lt;’transition-property’&amp;gt; || &amp;lt;’transition-duration’&amp;gt; || &amp;lt;’transi">
+<meta name="description" content="animationAnimation之前我们有必要先来了解一个特殊的东西，那就是”Keyframes”,我们把他叫做“关键帧”,Keyframes具有其自己的语法规则，他的命名是由”@keyframes”开头，后面紧接着是这个“动画的名称”加上一对花括号“{}”，括号中就是一些不同时间段样式规则，有点像我们css的样式写法一样。对于一个”@keyframes”中的样式规则是由多个百分比构成的，如“">
 <meta property="og:type" content="article">
-<meta property="og:title" content="css3-transform-transition-animation(续1)">
-<meta property="og:url" content="http://yoursite.com/2017/01/25/css3-transform-transition-animation-续1/index.html">
+<meta property="og:title" content="css3-transform-transition-animation-续2">
+<meta property="og:url" content="http://yoursite.com/2017/01/25/css3-transform-transition-animation-续2/index.html">
 <meta property="og:site_name" content="罗旭个人博客">
-<meta property="og:description" content="transition定义：css的transition允许css的属性值在一定的时间区间内平滑地过度，这种效果可以在鼠标单击、获得焦点、被点击或对元素任何改变中触发，并圆滑地以动画效果改变CSS的属性值。属性值:
-
- transition ： [&amp;lt;’transition-property’&amp;gt; || &amp;lt;’transition-duration’&amp;gt; || &amp;lt;’transi">
-<meta property="og:updated_time" content="2017-01-25T07:21:09.000Z">
+<meta property="og:description" content="animationAnimation之前我们有必要先来了解一个特殊的东西，那就是”Keyframes”,我们把他叫做“关键帧”,Keyframes具有其自己的语法规则，他的命名是由”@keyframes”开头，后面紧接着是这个“动画的名称”加上一对花括号“{}”，括号中就是一些不同时间段样式规则，有点像我们css的样式写法一样。对于一个”@keyframes”中的样式规则是由多个百分比构成的，如“">
+<meta property="og:updated_time" content="2017-01-25T07:59:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="css3-transform-transition-animation(续1)">
-<meta name="twitter:description" content="transition定义：css的transition允许css的属性值在一定的时间区间内平滑地过度，这种效果可以在鼠标单击、获得焦点、被点击或对元素任何改变中触发，并圆滑地以动画效果改变CSS的属性值。属性值:
-
- transition ： [&amp;lt;’transition-property’&amp;gt; || &amp;lt;’transition-duration’&amp;gt; || &amp;lt;’transi">
+<meta name="twitter:title" content="css3-transform-transition-animation-续2">
+<meta name="twitter:description" content="animationAnimation之前我们有必要先来了解一个特殊的东西，那就是”Keyframes”,我们把他叫做“关键帧”,Keyframes具有其自己的语法规则，他的命名是由”@keyframes”开头，后面紧接着是这个“动画的名称”加上一对花括号“{}”，括号中就是一些不同时间段样式规则，有点像我们css的样式写法一样。对于一个”@keyframes”中的样式规则是由多个百分比构成的，如“">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -62,7 +56,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>css3-transform-transition-animation(续1) | 罗旭个人博客</title>
+<title>css3-transform-transition-animation-续2 | 罗旭个人博客</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -266,11 +260,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-css3-transform-transition-animation-续1" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-css3-transform-transition-animation-续2" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/01/25/css3-transform-transition-animation-续1/" class="article-date">
-      <time datetime="2017-01-25T06:34:39.000Z" itemprop="datePublished">2017-01-25</time>
+      <a href="/2017/01/25/css3-transform-transition-animation-续2/" class="article-date">
+      <time datetime="2017-01-25T07:37:37.000Z" itemprop="datePublished">2017-01-25</time>
 </a>
 
 
@@ -285,7 +279,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      css3-transform-transition-animation(续1)
+      css3-transform-transition-animation-续2
     </h1>
   
 
@@ -295,10 +289,6 @@
         
 
         
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/animation/">animation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css3/">css3</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/transform/">transform</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/transition/">transition</a></li></ul>
-    </div>
-
         <div class="clearfix"></div>
       </div>
       
@@ -306,21 +296,56 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="transition"><a href="#transition" class="headerlink" title="transition"></a>transition</h2><p>定义：css的transition允许css的属性值在一定的时间区间内平滑地过度，这种效果可以在鼠标单击、获得焦点、被点击或对元素任何改变中触发，并圆滑地以动画效果改变CSS的属性值。<br>属性值:</p>
-<blockquote>
-<p> transition ： [&lt;’transition-property’&gt; || &lt;’transition-duration’&gt; || &lt;’transition-timing-function’&gt; ||<br>    &lt;’transition-delay’&gt; [, [&lt;’transition-property’&gt; || &lt;’transition-duration’&gt; ||<br>    &lt;’transition-timing-function’&gt; || &lt;’transition-delay’&gt;]]*</p>
+        <h2 id="animation"><a href="#animation" class="headerlink" title="animation"></a>animation</h2><p>Animation之前我们有必要先来了解一个特殊的东西，那就是”Keyframes”,我们把他叫做“关键帧”,Keyframes具有其自己的语法规则，他的命名是由”@keyframes”开头，后面紧接着是这个“动画的名称”加上一对花括号“{}”，括号中就是一些不同时间段样式规则，有点像我们css的样式写法一样。对于一个”@keyframes”中的样式规则是由多个百分比构成的，如“0%”到”100%”之间，我们可以在这个规则中创建多个百分比，我们分别给每一个百分比中给需要有动画效果的元素加上不同的属性，从而让元素达到一种在不断变化的效果，比如说移动，改变元素颜色，位置，大小，形状等，不过有一点需要注意的是，我们可以使用“fromt”“to”来代表一个动画是从哪开始，到哪结束，也就是说这个 “from”就相当于”0%”而”to”相当于”100%”,值得一说的是，其中”0%”不能像别的属性取值一样把百分比符号省略，我们在这里必须加上百分符号（“%”）如果没有加上的话，我们这个keyframes是无效的，不起任何作用。因为keyframes的单位只接受百分比值。</p>
+<h4 id="animation属性"><a href="#animation属性" class="headerlink" title="animation属性"></a>animation属性</h4><ol>
+<li>animation-name<blockquote>
+<p>animation-name: none | IDENT[,none | IDENT]</p>
 </blockquote>
-<h4 id="transition-property"><a href="#transition-property" class="headerlink" title="transition-property"></a>transition-property</h4><p>transition-property是用来指定当元素其中一个属性改变时执行transition效果，取值为:<br>all: 所有属性，默认值<br>indent: 元素属性名<br>none：transition马上停止执行</p>
-<h4 id="transition-duration"><a href="#transition-duration" class="headerlink" title="transition-duration"></a>transition-duration</h4><p>transition-duration是用来指定元素 转换过程的持续时间，取值：<time>为数值，单位为s（秒）或者ms(毫秒),可以作用于所有元素，包括:before和:after伪元素。其默认值是0，也就是变换时是即时的。</time></p>
-<h4 id="transition-timing-function"><a href="#transition-timing-function" class="headerlink" title="transition-timing-function"></a>transition-timing-function</h4><blockquote>
-<p> transition-timing-function ： ease | linear | ease-in | ease-out | ease-in-out | cubic-bezier(<number>, <number>, <number>, <number>) [, ease | linear | ease-in | ease-out | ease-in-out | cubic-bezier(<number>, <number>, <number>, <number>)]*</number></number></number></number></number></number></number></number></p>
+</li>
+</ol>
+<p>animation-name:是用来定义一个动画的名称，其主要有两个值：IDENT是由Keyframes创建的动画名，换句话说此处的IDENT要和Keyframes中的IDENT一致，如果不一致,将不能实现任何动画效果；none为默认值，当值为none时，将没有任何动画效果。另外我们这个属性跟前面所讲的transition一样，我们可以同时附几个animation给一个元素，我们只需要用逗号“，”隔开。</p>
+<ol>
+<li>animation-duration<blockquote>
+<p> animation-duration: <time>[,<time>]*</time></time></p>
 </blockquote>
-<p>transition-timing-function的值允许你根据时间的推进去改变属性值的变换速率，transition-timing-function有6个可能值：<br>1、ease：（逐渐变慢）默认值，ease函数等同于贝塞尔曲线(0.25, 0.1, 0.25, 1.0).<br>2、linear：（匀速），linear 函数等同于贝塞尔曲线(0.0, 0.0, 1.0, 1.0).<br>3、ease-in：(加速)，ease-in 函数等同于贝塞尔曲线(0.42, 0, 1.0, 1.0).<br>4、ease-out：（减速），ease-out 函数等同于贝塞尔曲线(0, 0, 0.58, 1.0).<br>5、ease-in-out：（加速然后减速），ease-in-out 函数等同于贝塞尔曲线(0.42, 0, 0.58, 1.0)<br>6、cubic-bezier：（该值允许你去自定义一个时间曲线）， 特定的cubic-bezier曲线。 (x1, y1, x2, y2)四个值特定于曲线上点P1和点P2。所有值需在[0, 1]区域内，否则无效。<br>其是cubic-bezier为通过贝赛尔曲线来计算“转换”过程中的属性值，如下曲线所示，通过改变P1(x1, y1)和P2(x2, y2)的坐标可以改变整个过程的Output Percentage。初始默认值为default.</p>
-<h4 id="transition-delay"><a href="#transition-delay" class="headerlink" title="transition-delay"></a>transition-delay</h4><p>transition-delay是用来指定一个动画开始执行的时间，也就是说当改变元素属性值后多长时间开始执行transition效果，其取值：<time>为数值，单位为s（秒）或者ms(毫秒)，其使用和transition-duration极其相似，也可以作用于所有元素，包括:before和:after伪元素。 默认大小是”0”，也就是变换立即执行，没有延迟。</time></p>
-<p>有时我们不只改变一个css效果的属性,而是想改变两个或者多个css属性的transition效果，那么我们只要把几个transition的声明串在一起，用逗号（“，”）隔开，然后各自可以有各自不同的延续时间和其时间的速率变换方式。但需要值得注意的一点：transition-delay与transition-duration的值都是时间，所以要区分它们在连写中的位置，一般浏览器会根据先后顺序决定，第一个可以解析为时间的怭值为transition-duration第二个为transition-delay。如：</p>
-<blockquote>
-<p>a {<br>    -moz-transition: background 0.5s ease-in,color 0.3s ease-out;<br>    -webkit-transition: background 0.5s ease-in,color 0.3s ease-out;<br>    -o-transition: background 0.5s ease-in,color 0.3s ease-out;<br>    transition: background 0.5s ease-in,color 0.3s ease-out;<br>  }</p>
+</li>
+</ol>
+<p>animation-duration是用来指定元素播放动画所持续的时间长，取值:<time>为数值，单位为s （秒.）其默认值为“0”。这个属性跟transition中的transition-duration使用方法是一样的。</time></p>
+<ol>
+<li>animation-timing-function<blockquote>
+<p>  animation-timing-function:ease | linear | ease-in | ease-out | ease-in-out | cubic-bezier(<number>, <number>, <number>, <number>) [, ease | linear | ease-in | ease-out | ease-in-out | cubic-bezier(<number>, <number>, <number>, <number>)]*</number></number></number></number></number></number></number></number></p>
 </blockquote>
+</li>
+</ol>
+<p>animation-timing-function:是指元素根据时间的推进来改变属性值的变换速率，说得简单点就是动画的播放方式。他和transition中的transition-timing-function一样，具有以下六种变换方式：ease;ease-in;ease-in-out;linear;cubic-bezier。具体的使用方法大家可以点这里，查看其中transition-timing-function的使用方法。</p>
+<ol>
+<li>animation-delay<blockquote>
+<p> animation-delay: <time>[,<time>]*</time></time></p>
+</blockquote>
+</li>
+</ol>
+<p>animation-delay:是用来指定元素动画开始时间。取值为<time>为数值，单位为s(秒)，其默认值也是0。这个属性和transition-delayy使用方法是一样的。</time></p>
+<ol>
+<li>animation-direction<blockquote>
+<p> animation-direction: normal | alternate [, normal | alternate]</p>
+</blockquote>
+</li>
+</ol>
+<p>animation-direction是用来指定元素动画播放的方向，其只有两个值，默认值为normal，如果设置为normal时，动画的每次循环都是向前播放；另一个值是alternate，他的作用是，动画播放在第偶数次向前播放，第奇数次向反方向播放。</p>
+<ol>
+<li>animation-direction<blockquote>
+<p> animation-direction: normal | alternate [, normal | alternate]</p>
+</blockquote>
+</li>
+</ol>
+<p>animation-direction是用来指定元素动画播放的方向，其只有两个值，默认值为normal，如果设置为normal时，动画的每次循环都是向前播放；另一个值是alternate，他的作用是，动画播放在第偶数次向前播放，第奇数次向反方向播放。</p>
+<ol>
+<li>animation-play-state<blockquote>
+<p>  animation-play-state:running | paused [, running | paused]</p>
+</blockquote>
+</li>
+</ol>
+<p>animation-play-state主要是用来控制元素动画的播放状态。其主要有两个值，running和paused其中running为默认值。他们的作用就类似于我们的音乐播放器一样，可以通过paused将正在播放的动画停下了，也可以通过running将暂停的动画重新播放，我们这里的重新播放不一定是从元素动画的开始播放，而是从你暂停的那个位置开始播放。另外如果暂时了动画的播放，元素的样式将回到最原始设置状态。</p>
 
       
     </div>
@@ -329,13 +354,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/01/25/css3-transform-transition-animation-续1/">css3-transform-transition-animation(续1)</a></p>
+        <p><span>本文标题:</span><a href="/2017/01/25/css3-transform-transition-animation-续2/">css3-transform-transition-animation-续2</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">罗旭</a></p>
-        <p><span>发布时间:</span>2017-01-25, 14:34:39</p>
-        <p><span>最后更新:</span>2017-01-25, 15:21:09</p>
+        <p><span>发布时间:</span>2017-01-25, 15:37:37</p>
+        <p><span>最后更新:</span>2017-01-25, 15:59:00</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/01/25/css3-transform-transition-animation-续1/" title="css3-transform-transition-animation(续1)">http://yoursite.com/2017/01/25/css3-transform-transition-animation-续1/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/01/25/css3-transform-transition-animation-续1/　　作者: 罗旭" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/01/25/css3-transform-transition-animation-续2/" title="css3-transform-transition-animation-续2">http://yoursite.com/2017/01/25/css3-transform-transition-animation-续2/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/01/25/css3-transform-transition-animation-续2/　　作者: 罗旭" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -347,16 +372,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/01/25/css3-transform-transition-animation-续2/">
-                    css3-transform-transition-animation-续2
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2017/01/24/css3-transform-transition-amination/">
-                    css3-transform,transition,animation
+                <a href="/2017/01/25/css3-transform-transition-animation-续1/">
+                    css3-transform-transition-animation(续1)
                 </a>
             </div>
         
@@ -369,7 +388,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#transition"><span class="toc-number">1.</span> <span class="toc-text">transition</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#transition-property"><span class="toc-number">1.0.1.</span> <span class="toc-text">transition-property</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#transition-duration"><span class="toc-number">1.0.2.</span> <span class="toc-text">transition-duration</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#transition-timing-function"><span class="toc-number">1.0.3.</span> <span class="toc-text">transition-timing-function</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#transition-delay"><span class="toc-number">1.0.4.</span> <span class="toc-text">transition-delay</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#animation"><span class="toc-number">1.</span> <span class="toc-text">animation</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#animation属性"><span class="toc-number">1.0.1.</span> <span class="toc-text">animation属性</span></a></li></ol></li></ol></li></ol>
         
     </div>
     <style>
@@ -405,7 +424,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"css3-transform-transition-animation(续1)　| 罗旭个人博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"css3-transform-transition-animation-续2　| 罗旭个人博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -421,7 +440,7 @@
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2017/01/25/css3-transform-transition-animation-续1/" data-title="css3-transform-transition-animation(续1)" data-url="http://yoursite.com/2017/01/25/css3-transform-transition-animation-续1/"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/01/25/css3-transform-transition-animation-续2/" data-title="css3-transform-transition-animation-续2" data-url="http://yoursite.com/2017/01/25/css3-transform-transition-animation-续2/"></div>
     <script>
         var duoshuoQuery = {short_name:"hexoluodaxu"};
         var loadComment = function(){
@@ -444,15 +463,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/01/25/css3-transform-transition-animation-续2/" title="上一篇: css3-transform-transition-animation-续2">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/01/24/css3-transform-transition-amination/" title="下一篇: css3-transform,transition,animation">
+            <a href="/2017/01/25/css3-transform-transition-animation-续1/" title="下一篇: css3-transform-transition-animation(续1)">
                 <i class="fa fa-angle-right"></i>
             </a>
         

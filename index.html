@@ -266,6 +266,111 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-css3-transform-transition-animation-续2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/01/25/css3-transform-transition-animation-续2/" class="article-date">
+      <time datetime="2017-01-25T07:37:37.000Z" itemprop="datePublished">2017-01-25</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/25/css3-transform-transition-animation-续2/">css3-transform-transition-animation-续2</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="animation"><a href="#animation" class="headerlink" title="animation"></a>animation</h2><p>Animation之前我们有必要先来了解一个特殊的东西，那就是”Keyframes”,我们把他叫做“关键帧”,Keyframes具有其自己的语法规则，他的命名是由”@keyframes”开头，后面紧接着是这个“动画的名称”加上一对花括号“{}”，括号中就是一些不同时间段样式规则，有点像我们css的样式写法一样。对于一个”@keyframes”中的样式规则是由多个百分比构成的，如“0%”到”100%”之间，我们可以在这个规则中创建多个百分比，我们分别给每一个百分比中给需要有动画效果的元素加上不同的属性，从而让元素达到一种在不断变化的效果，比如说移动，改变元素颜色，位置，大小，形状等，不过有一点需要注意的是，我们可以使用“fromt”“to”来代表一个动画是从哪开始，到哪结束，也就是说这个 “from”就相当于”0%”而”to”相当于”100%”,值得一说的是，其中”0%”不能像别的属性取值一样把百分比符号省略，我们在这里必须加上百分符号（“%”）如果没有加上的话，我们这个keyframes是无效的，不起任何作用。因为keyframes的单位只接受百分比值。</p>
+<h4 id="animation属性"><a href="#animation属性" class="headerlink" title="animation属性"></a>animation属性</h4><ol>
+<li>animation-name<blockquote>
+<p>animation-name: none | IDENT[,none | IDENT]</p>
+</blockquote>
+</li>
+</ol>
+<p>animation-name:是用来定义一个动画的名称，其主要有两个值：IDENT是由Keyframes创建的动画名，换句话说此处的IDENT要和Keyframes中的IDENT一致，如果不一致,将不能实现任何动画效果；none为默认值，当值为none时，将没有任何动画效果。另外我们这个属性跟前面所讲的transition一样，我们可以同时附几个animation给一个元素，我们只需要用逗号“，”隔开。</p>
+<ol>
+<li>animation-duration<blockquote>
+<p> animation-duration: <time>[,<time>]*</time></time></p>
+</blockquote>
+</li>
+</ol>
+<p>animation-duration是用来指定元素播放动画所持续的时间长，取值:<time>为数值，单位为s （秒.）其默认值为“0”。这个属性跟transition中的transition-duration使用方法是一样的。</time></p>
+<ol>
+<li>animation-timing-function<blockquote>
+<p>  animation-timing-function:ease | linear | ease-in | ease-out | ease-in-out | cubic-bezier(<number>, <number>, <number>, <number>) [, ease | linear | ease-in | ease-out | ease-in-out | cubic-bezier(<number>, <number>, <number>, <number>)]*</number></number></number></number></number></number></number></number></p>
+</blockquote>
+</li>
+</ol>
+<p>animation-timing-function:是指元素根据时间的推进来改变属性值的变换速率，说得简单点就是动画的播放方式。他和transition中的transition-timing-function一样，具有以下六种变换方式：ease;ease-in;ease-in-out;linear;cubic-bezier。具体的使用方法大家可以点这里，查看其中transition-timing-function的使用方法。</p>
+<ol>
+<li>animation-delay<blockquote>
+<p> animation-delay: <time>[,<time>]*</time></time></p>
+</blockquote>
+</li>
+</ol>
+<p>animation-delay:是用来指定元素动画开始时间。取值为<time>为数值，单位为s(秒)，其默认值也是0。这个属性和transition-delayy使用方法是一样的。</time></p>
+<ol>
+<li>animation-direction<blockquote>
+<p> animation-direction: normal | alternate [, normal | alternate]</p>
+</blockquote>
+</li>
+</ol>
+<p>animation-direction是用来指定元素动画播放的方向，其只有两个值，默认值为normal，如果设置为normal时，动画的每次循环都是向前播放；另一个值是alternate，他的作用是，动画播放在第偶数次向前播放，第奇数次向反方向播放。</p>
+<ol>
+<li>animation-direction<blockquote>
+<p> animation-direction: normal | alternate [, normal | alternate]</p>
+</blockquote>
+</li>
+</ol>
+<p>animation-direction是用来指定元素动画播放的方向，其只有两个值，默认值为normal，如果设置为normal时，动画的每次循环都是向前播放；另一个值是alternate，他的作用是，动画播放在第偶数次向前播放，第奇数次向反方向播放。</p>
+<ol>
+<li>animation-play-state<blockquote>
+<p>  animation-play-state:running | paused [, running | paused]</p>
+</blockquote>
+</li>
+</ol>
+<p>animation-play-state主要是用来控制元素动画的播放状态。其主要有两个值，running和paused其中running为默认值。他们的作用就类似于我们的音乐播放器一样，可以通过paused将正在播放的动画停下了，也可以通过running将暂停的动画重新播放，我们这里的重新播放不一定是从元素动画的开始播放，而是从你暂停的那个位置开始播放。另外如果暂时了动画的播放，元素的样式将回到最原始设置状态。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-css3-transform-transition-animation-续1" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -295,7 +400,22 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        
+        <h2 id="transition"><a href="#transition" class="headerlink" title="transition"></a>transition</h2><p>定义：css的transition允许css的属性值在一定的时间区间内平滑地过度，这种效果可以在鼠标单击、获得焦点、被点击或对元素任何改变中触发，并圆滑地以动画效果改变CSS的属性值。<br>属性值:</p>
+<blockquote>
+<p> transition ： [&lt;’transition-property’&gt; || &lt;’transition-duration’&gt; || &lt;’transition-timing-function’&gt; ||<br>    &lt;’transition-delay’&gt; [, [&lt;’transition-property’&gt; || &lt;’transition-duration’&gt; ||<br>    &lt;’transition-timing-function’&gt; || &lt;’transition-delay’&gt;]]*</p>
+</blockquote>
+<h4 id="transition-property"><a href="#transition-property" class="headerlink" title="transition-property"></a>transition-property</h4><p>transition-property是用来指定当元素其中一个属性改变时执行transition效果，取值为:<br>all: 所有属性，默认值<br>indent: 元素属性名<br>none：transition马上停止执行</p>
+<h4 id="transition-duration"><a href="#transition-duration" class="headerlink" title="transition-duration"></a>transition-duration</h4><p>transition-duration是用来指定元素 转换过程的持续时间，取值：<time>为数值，单位为s（秒）或者ms(毫秒),可以作用于所有元素，包括:before和:after伪元素。其默认值是0，也就是变换时是即时的。</time></p>
+<h4 id="transition-timing-function"><a href="#transition-timing-function" class="headerlink" title="transition-timing-function"></a>transition-timing-function</h4><blockquote>
+<p> transition-timing-function ： ease | linear | ease-in | ease-out | ease-in-out | cubic-bezier(<number>, <number>, <number>, <number>) [, ease | linear | ease-in | ease-out | ease-in-out | cubic-bezier(<number>, <number>, <number>, <number>)]*</number></number></number></number></number></number></number></number></p>
+</blockquote>
+<p>transition-timing-function的值允许你根据时间的推进去改变属性值的变换速率，transition-timing-function有6个可能值：<br>1、ease：（逐渐变慢）默认值，ease函数等同于贝塞尔曲线(0.25, 0.1, 0.25, 1.0).<br>2、linear：（匀速），linear 函数等同于贝塞尔曲线(0.0, 0.0, 1.0, 1.0).<br>3、ease-in：(加速)，ease-in 函数等同于贝塞尔曲线(0.42, 0, 1.0, 1.0).<br>4、ease-out：（减速），ease-out 函数等同于贝塞尔曲线(0, 0, 0.58, 1.0).<br>5、ease-in-out：（加速然后减速），ease-in-out 函数等同于贝塞尔曲线(0.42, 0, 0.58, 1.0)<br>6、cubic-bezier：（该值允许你去自定义一个时间曲线）， 特定的cubic-bezier曲线。 (x1, y1, x2, y2)四个值特定于曲线上点P1和点P2。所有值需在[0, 1]区域内，否则无效。<br>其是cubic-bezier为通过贝赛尔曲线来计算“转换”过程中的属性值，如下曲线所示，通过改变P1(x1, y1)和P2(x2, y2)的坐标可以改变整个过程的Output Percentage。初始默认值为default.</p>
+<h4 id="transition-delay"><a href="#transition-delay" class="headerlink" title="transition-delay"></a>transition-delay</h4><p>transition-delay是用来指定一个动画开始执行的时间，也就是说当改变元素属性值后多长时间开始执行transition效果，其取值：<time>为数值，单位为s（秒）或者ms(毫秒)，其使用和transition-duration极其相似，也可以作用于所有元素，包括:before和:after伪元素。 默认大小是”0”，也就是变换立即执行，没有延迟。</time></p>
+<p>有时我们不只改变一个css效果的属性,而是想改变两个或者多个css属性的transition效果，那么我们只要把几个transition的声明串在一起，用逗号（“，”）隔开，然后各自可以有各自不同的延续时间和其时间的速率变换方式。但需要值得注意的一点：transition-delay与transition-duration的值都是时间，所以要区分它们在连写中的位置，一般浏览器会根据先后顺序决定，第一个可以解析为时间的怭值为transition-duration第二个为transition-delay。如：</p>
+<blockquote>
+<p>a {<br>    -moz-transition: background 0.5s ease-in,color 0.3s ease-out;<br>    -webkit-transition: background 0.5s ease-in,color 0.3s ease-out;<br>    -o-transition: background 0.5s ease-in,color 0.3s ease-out;<br>    transition: background 0.5s ease-in,color 0.3s ease-out;<br>  }</p>
+</blockquote>
+
       
     </div>
     
@@ -304,6 +424,10 @@
       
 
       
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/animation/">animation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css3/">css3</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/transform/">transform</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/transition/">transition</a></li></ul>
+    </div>
+
       
       <div class="clearfix"></div>
     </div>
@@ -1050,74 +1174,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/property/">property</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-algorithm-LazyMan" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/01/18/algorithm-LazyMan/" class="article-date">
-      <time datetime="2017-01-18T06:18:58.000Z" itemprop="datePublished">2017-01-18</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/18/algorithm-LazyMan/">algorithm-LazyMan</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h4 id="算法题目："><a href="#算法题目：" class="headerlink" title="算法题目："></a>算法题目：</h4><blockquote>
-<p>实现一个LazyMan，可以按照以下方式调用:<br>LazyMan(“Hank”)输出:<br>Hi! This is Hank!</p>
-<p>LazyMan(“Hank”).sleep(10).eat(“dinner”)输出<br>Hi! This is Hank!<br>//等待10秒..<br>Wake up after 10<br>Eat dinner~</p>
-<p>LazyMan(“Hank”).eat(“dinner”).eat(“supper”)输出<br>Hi This is Hank!<br>Eat dinner~<br>Eat supper~</p>
-<p>LazyMan(“Hank”).sleepFirst(5).eat(“supper”)输出<br>//等待5秒<br>Wake up after 5<br>Hi This is Hank!<br>Eat supper</p>
-<p>以此类推。</p>
-</blockquote>
-<h4 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h4><p>这个是典型的javscript流程控制，关键是如何实现任务的顺序执行，可以将每个函数可以看成一个任务，每调用一个函数就将这个加入任务队伍，这种类似于express的中间件问题，每个中间件执行完成后就会调用next()函数，这个函数会调用下一个中间件。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line">function _LazyMan(name) &#123;</div><div class="line">    this.tasks = [];</div><div class="line">    var self = this;</div><div class="line">    var fn = (function (n) &#123;</div><div class="line">        var name = n;</div><div class="line">        return function () &#123;</div><div class="line">            console.log(&apos;Hi! This is &apos; + name + &quot;!&quot;);</div><div class="line">            self.next();</div><div class="line">        &#125;</div><div class="line">    &#125;)(name);</div><div class="line">    this.tasks.push(fn);</div><div class="line">    return this;</div><div class="line">&#125;</div><div class="line"></div><div class="line">_LazyMan.prototype.next = function () &#123;</div><div class="line">    var fn = this.tasks.shift();</div><div class="line">    fn &amp;&amp; fn();</div><div class="line">&#125;;</div><div class="line"></div><div class="line">_LazyMan.prototype.sleep = function (time) &#123;</div><div class="line">    var self = this;</div><div class="line">    var fn = (function () &#123;</div><div class="line">        return function () &#123;</div><div class="line">            setTimeout(function () &#123;</div><div class="line">                console.log(&apos;Wake up after &apos; + time + &apos;s!&apos;);</div><div class="line">                next();</div><div class="line">            &#125;, time * 1000);</div><div class="line">        &#125;;</div><div class="line">    &#125;)(time);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">_LazyMan.prototype.eat = function (name) &#123;</div><div class="line">    var self = this;</div><div class="line">    var fn = (function () &#123;</div><div class="line">        return function () &#123;</div><div class="line">            console.log(&apos;Eat &apos; + name + &apos;~&apos;);</div><div class="line">            self.next();</div><div class="line">        &#125;;</div><div class="line">    &#125;)(name);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">_LazyMan.prototype.sleepFirst = function(time) &#123;</div><div class="line">    var self = this;</div><div class="line">    var fn = (function(time) &#123;</div><div class="line">        return function() &#123;</div><div class="line">            setTimeout(function() &#123;</div><div class="line">                console.log(&quot;Wake up after &quot; + time + &quot;s!&quot;);</div><div class="line">                self.next();</div><div class="line">            &#125;, time * 1000);</div><div class="line">        &#125;</div><div class="line">    &#125;)(time);</div><div class="line">    this.tasks.unshift(fn);</div><div class="line">    return this;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">function LazyMan(name) &#123;</div><div class="line">    return new _LazyMan(name);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lasyman/">lasyman</a></li></ul>
     </div>
 
       
