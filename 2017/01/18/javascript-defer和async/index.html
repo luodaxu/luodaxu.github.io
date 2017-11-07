@@ -15,26 +15,18 @@
 
 
 
-<meta name="description" content="javascript加载和执行javascript在浏览器中分为加载和执行两个过程，当浏览器碰到script脚本时候，分为以下情况：
-
-&amp;lt;script src=”index.js”&amp;gt;&amp;lt;/script&amp;gt;没有defer或async，浏览器会立即加载并执行指定的脚本，立即指的是在渲染该script标签下的文档元素之前，也就是说不等待后续载入的文档元素，读到就加载并执行。
-&amp;lt;">
+<meta name="description" content="javascript加载和执行javascript在浏览器中分为加载和执行两个过程，当浏览器碰到script脚本时候，分为以下情况：  &amp;lt;script src=”index.js”&amp;gt;&amp;lt;/script&amp;gt;没有defer或async，浏览器会立即加载并执行指定的脚本，立即指的是在渲染该script标签下的文档元素之前，也就是说不等待后续载入的文档元素，读到就加载并执行。 &amp;lt;">
+<meta name="keywords" content="defer,async,web优化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="javascript-defer和async">
 <meta property="og:url" content="http://yoursite.com/2017/01/18/javascript-defer和async/index.html">
 <meta property="og:site_name" content="罗旭个人博客">
-<meta property="og:description" content="javascript加载和执行javascript在浏览器中分为加载和执行两个过程，当浏览器碰到script脚本时候，分为以下情况：
-
-&amp;lt;script src=”index.js”&amp;gt;&amp;lt;/script&amp;gt;没有defer或async，浏览器会立即加载并执行指定的脚本，立即指的是在渲染该script标签下的文档元素之前，也就是说不等待后续载入的文档元素，读到就加载并执行。
-&amp;lt;">
+<meta property="og:description" content="javascript加载和执行javascript在浏览器中分为加载和执行两个过程，当浏览器碰到script脚本时候，分为以下情况：  &amp;lt;script src=”index.js”&amp;gt;&amp;lt;/script&amp;gt;没有defer或async，浏览器会立即加载并执行指定的脚本，立即指的是在渲染该script标签下的文档元素之前，也就是说不等待后续载入的文档元素，读到就加载并执行。 &amp;lt;">
 <meta property="og:image" content="http://yoursite.com/img/script.jpeg">
 <meta property="og:updated_time" content="2017-01-18T06:04:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="javascript-defer和async">
-<meta name="twitter:description" content="javascript加载和执行javascript在浏览器中分为加载和执行两个过程，当浏览器碰到script脚本时候，分为以下情况：
-
-&amp;lt;script src=”index.js”&amp;gt;&amp;lt;/script&amp;gt;没有defer或async，浏览器会立即加载并执行指定的脚本，立即指的是在渲染该script标签下的文档元素之前，也就是说不等待后续载入的文档元素，读到就加载并执行。
-&amp;lt;">
+<meta name="twitter:description" content="javascript加载和执行javascript在浏览器中分为加载和执行两个过程，当浏览器碰到script脚本时候，分为以下情况：  &amp;lt;script src=”index.js”&amp;gt;&amp;lt;/script&amp;gt;没有defer或async，浏览器会立即加载并执行指定的脚本，立即指的是在渲染该script标签下的文档元素之前，也就是说不等待后续载入的文档元素，读到就加载并执行。 &amp;lt;">
 <meta name="twitter:image" content="http://yoursite.com/img/script.jpeg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
@@ -461,7 +453,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/01/25/css3-transform-transition-animation-续2/">css3-transform-transition-animation-续2</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/25/css3-transform-transition-animation-续1/">css3-transform-transition-animation(续1)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/24/css3-transform-transition-amination/">css3-transform,transition,animation</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/23/react-高阶组件/">react-高阶组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/22/sass之四-mixin-include-placeholder-2/">sass之四-mixin-include-placeholder(2)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/21/web优化之css-sprites/">web优化之css sprites</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/20/sass之三-mixin-include-placeholder/">sass之三-mixin,include, %placeholder</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/20/sass之二-sass调试/">sass之二-sass调试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/20/sass之一-sass介绍/">sass之一:sass介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/18/css-获取css属性/">css-获取css属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/18/algorithm-LazyMan/">algorithm-LazyMan</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/18/javascript-defer和async/">javascript-defer和async</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/11/React生命周期/">React生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/11/React的四个概念/">React的四个概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/11/hexo常用命令/">hexo常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/13/css3-px-em-rem/">css3-px,em,rem</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/13/css3-placeholder/">css3-placeholder</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/22/广丰/">我的家乡－广丰</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/29/hello-world/">Hello, Welcome!</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/18/react/">React系列之一：初识React</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/02/06/css-重点和难点/">css-重点和难点</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/25/css3-transform-transition-animation-续2/">css3-transform-transition-animation-续2</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/25/css3-transform-transition-animation-续1/">css3-transform-transition-animation(续1)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/24/css3-transform-transition-amination/">css3-transform,transition,animation</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/23/react-高阶组件/">react-高阶组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/22/sass之四-mixin-include-placeholder-2/">sass之四-mixin-include-placeholder(2)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/21/web优化之css-sprites/">web优化之css sprites</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/20/sass之三-mixin-include-placeholder/">sass之三-mixin,include, %placeholder</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/20/sass之二-sass调试/">sass之二-sass调试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/20/sass之一-sass介绍/">sass之一:sass介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/18/css-获取css属性/">css-获取css属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/18/algorithm-LazyMan/">algorithm-LazyMan</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/18/javascript-defer和async/">javascript-defer和async</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/11/React生命周期/">React生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/11/React的四个概念/">React的四个概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/11/hexo常用命令/">hexo常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/13/css3-px-em-rem/">css3-px,em,rem</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/13/css3-placeholder/">css3-placeholder</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/22/广丰/">我的家乡－广丰</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/29/hello-world/">Hello, Welcome!</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/18/react/">React系列之一：初识React</a></li></ul>
 
 
 

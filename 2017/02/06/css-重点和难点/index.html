@@ -15,17 +15,16 @@
 
 
 
-<meta name="description" content="Css sprites翻译为css精灵，其实就是通过多个多个图片融合到一幅图里面，然后通过CSS的一些技术布局到网页上。好处就是图片多的话，会增加http的请求，促使网站性能的降低，特别是图片特别多的网站，如果能用css sprites降低图片数量，带来的将是速度的提升。这样一来，当访问该页面时候，，载入的图片就不会像以前那样一幅一幅地慢慢显示出来了。对于当前网络流行的速度而言，不高于200KB的">
-<meta name="keywords" content="css,web优化,image">
+<meta name="description" content="罗旭的博客">
 <meta property="og:type" content="article">
-<meta property="og:title" content="web优化之css sprites">
-<meta property="og:url" content="http://yoursite.com/2017/01/21/web优化之css-sprites/index.html">
+<meta property="og:title" content="css-重点和难点">
+<meta property="og:url" content="http://yoursite.com/2017/02/06/css-重点和难点/index.html">
 <meta property="og:site_name" content="罗旭个人博客">
-<meta property="og:description" content="Css sprites翻译为css精灵，其实就是通过多个多个图片融合到一幅图里面，然后通过CSS的一些技术布局到网页上。好处就是图片多的话，会增加http的请求，促使网站性能的降低，特别是图片特别多的网站，如果能用css sprites降低图片数量，带来的将是速度的提升。这样一来，当访问该页面时候，，载入的图片就不会像以前那样一幅一幅地慢慢显示出来了。对于当前网络流行的速度而言，不高于200KB的">
-<meta property="og:updated_time" content="2017-01-22T05:48:40.000Z">
+<meta property="og:description" content="罗旭的博客">
+<meta property="og:updated_time" content="2017-02-06T05:25:21.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="web优化之css sprites">
-<meta name="twitter:description" content="Css sprites翻译为css精灵，其实就是通过多个多个图片融合到一幅图里面，然后通过CSS的一些技术布局到网页上。好处就是图片多的话，会增加http的请求，促使网站性能的降低，特别是图片特别多的网站，如果能用css sprites降低图片数量，带来的将是速度的提升。这样一来，当访问该页面时候，，载入的图片就不会像以前那样一幅一幅地慢慢显示出来了。对于当前网络流行的速度而言，不高于200KB的">
+<meta name="twitter:title" content="css-重点和难点">
+<meta name="twitter:description" content="罗旭的博客">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -57,7 +56,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>web优化之css sprites | 罗旭个人博客</title>
+<title>css-重点和难点 | 罗旭个人博客</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -261,11 +260,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-web优化之css-sprites" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-css-重点和难点" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/01/21/web优化之css-sprites/" class="article-date">
-      <time datetime="2017-01-21T02:19:27.000Z" itemprop="datePublished">2017-01-21</time>
+      <a href="/2017/02/06/css-重点和难点/" class="article-date">
+      <time datetime="2017-02-06T05:25:21.000Z" itemprop="datePublished">2017-02-06</time>
 </a>
 
 
@@ -280,7 +279,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      web优化之css sprites
+      css-重点和难点
     </h1>
   
 
@@ -290,10 +289,6 @@
         
 
         
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/image/">image</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web优化/">web优化</a></li></ul>
-    </div>
-
         <div class="clearfix"></div>
       </div>
       
@@ -301,22 +296,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>Css sprites翻译为css精灵，其实就是通过多个多个图片融合到一幅图里面，然后通过CSS的一些技术布局到网页上。好处就是图片多的话，会增加http的请求，促使网站性能的降低，特别是图片特别多的网站，如果能用css sprites降低图片数量，带来的将是速度的提升。这样一来，当访问该页面时候，，载入的图片就不会像以前那样一幅一幅地慢慢显示出来了。对于当前网络流行的速度而言，不高于200KB的单张图片的所需载入时间基本是差不多的，所以无需顾忌这个问题。</p>
-<h4 id="CSS-Sprites使用"><a href="#CSS-Sprites使用" class="headerlink" title="CSS Sprites使用"></a>CSS Sprites使用</h4><ol>
-<li><p>首先定义一个共用的css样式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">.bg_sprite &#123; background-image: url(/your image..); background-repeat: no-repeat &#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>针对不同的需求设置background-position</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#ico1 &#123;width:容器宽度;height:容器高度;background-position:X坐标 Y坐标&#125;</div><div class="line">#ico2 &#123;width:容器宽度;height:容器高度;background-position:X坐标 Y坐标&#125;</div><div class="line">#ico3 &#123;width:容器宽度;height:容器高度;background-position:X坐标 Y坐标&#125;</div><div class="line">.nav &#123;width:容器宽度;height:容器高度;background-position:X坐标 Y坐标&#125;</div><div class="line">当然也有简写方法：</div><div class="line">#ico1 &#123;width:容器宽度;height:容器高度;background:url(/整图地址) no-repeat X坐标 Y坐标;&#125;</div><div class="line">其中，X坐标和Y坐标表示原图相对于ico1框左上角点的偏移量，即 坐标 0 0表示背景图和ico1框的左上角点重合</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<h4 id="什么是base64编码"><a href="#什么是base64编码" class="headerlink" title="什么是base64编码"></a>什么是base64编码</h4><p>图片的下载始终都要向服务器请求，要是图片的下载不用向服务器发出请求，而可以随着HTML的下载同时下载到本地，base64就是正好解决此问题。<br>图片的base64编码就是将一副图片数据编码成一个字符串，使用该字符串代替图像地址。下面以base64编码和CssSprites比较为例，使用base64编码前提就是base64编码的图片尺寸足够小。<br>如下图所示，博客园的Logo只有3.27KB，已经很小了，但是如果将其制作转化成base64编码，生成的base64字符串编码足足有 4406 个。即便base64编码能够被gzip压缩，压缩率能达到50%以上，想象一下，一个元素的css样式编写居然超过了2000个字符，那对css整体的可读性将会造成十分大的影响，代码的冗余使得在此使用base64编码将得不偿失。<br>那么，是不是表示base64编码无用武之地呢？不然。当页面中的图片满足以下要求，base64就能大显生手。<br>如果<strong>图片足够小</strong>且因为用处的<strong>特殊性无法被制作成雪碧图（CssSprites）</strong> ，在整个网站的复用性很高且基本不会被更新 。那么此时使用base64编码传输图片就可谓好钢用在刀刃上，思前想后，符合这个规则的，有一个是我们经常会遇到的，就是页面的背景图background-image。在很多地方，我们会制作一个很小的图片大概是几px*几px，然后平铺它页面当背景图。因为是背景图的缘故，所以无法将它放入雪碧图，而它却存在网站的很多页面，这种图片往往只有几十字节，却需要一个http请求，十分不值得。那么此时将它转化为base64编码，何乐而不为.</p>
-<h4 id="base64和CssSprites"><a href="#base64和CssSprites" class="headerlink" title="base64和CssSprites"></a>base64和CssSprites</h4><p>对两种技术的看法：</p>
-<ol>
-<li>使用CssSprites合并为一张大图，页面具有多种风格，需要换肤功能，可以使用CssSprites，不会频繁的改动，使用时候无需重复图形内容，没有base64编码成本，降低图片更新的维护难度。</li>
-<li>使用base64直接把图片编码成字符串写入CSS文件，无须额外请求，对极小或者极简单图片可以被gzip，降低css维护难度，可像单独图片一样使用，比如背景图片使用等，没有跨域问题，无需老吕缓存，文件头或者cookies问题</li>
-</ol>
-
+        
       
     </div>
     
@@ -324,13 +304,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/01/21/web优化之css-sprites/">web优化之css sprites</a></p>
+        <p><span>本文标题:</span><a href="/2017/02/06/css-重点和难点/">css-重点和难点</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">罗旭</a></p>
-        <p><span>发布时间:</span>2017-01-21, 10:19:27</p>
-        <p><span>最后更新:</span>2017-01-22, 13:48:40</p>
+        <p><span>发布时间:</span>2017-02-06, 13:25:21</p>
+        <p><span>最后更新:</span>2017-02-06, 13:25:21</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/01/21/web优化之css-sprites/" title="web优化之css sprites">http://yoursite.com/2017/01/21/web优化之css-sprites/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/01/21/web优化之css-sprites/　　作者: 罗旭" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/02/06/css-重点和难点/" title="css-重点和难点">http://yoursite.com/2017/02/06/css-重点和难点/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/02/06/css-重点和难点/　　作者: 罗旭" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -342,16 +322,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/01/22/sass之四-mixin-include-placeholder-2/">
-                    sass之四-mixin-include-placeholder(2)
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2017/01/20/sass之三-mixin-include-placeholder/">
-                    sass之三-mixin,include, %placeholder
+                <a href="/2017/01/25/css3-transform-transition-animation-续2/">
+                    css3-transform-transition-animation-续2
                 </a>
             </div>
         
@@ -364,7 +338,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#CSS-Sprites使用"><span class="toc-number">1.</span> <span class="toc-text">CSS Sprites使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是base64编码"><span class="toc-number">2.</span> <span class="toc-text">什么是base64编码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#base64和CssSprites"><span class="toc-number">3.</span> <span class="toc-text">base64和CssSprites</span></a></li></ol>
+            
         
     </div>
     <style>
@@ -400,7 +374,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"web优化之css sprites　| 罗旭个人博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"css-重点和难点　| 罗旭个人博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -416,7 +390,7 @@
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2017/01/21/web优化之css-sprites/" data-title="web优化之css sprites" data-url="http://yoursite.com/2017/01/21/web优化之css-sprites/"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/02/06/css-重点和难点/" data-title="css-重点和难点" data-url="http://yoursite.com/2017/02/06/css-重点和难点/"></div>
     <script>
         var duoshuoQuery = {short_name:"hexoluodaxu"};
         var loadComment = function(){
@@ -439,15 +413,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/01/22/sass之四-mixin-include-placeholder-2/" title="上一篇: sass之四-mixin-include-placeholder(2)">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/01/20/sass之三-mixin-include-placeholder/" title="下一篇: sass之三-mixin,include, %placeholder">
+            <a href="/2017/01/25/css3-transform-transition-animation-续2/" title="下一篇: css3-transform-transition-animation-续2">
                 <i class="fa fa-angle-right"></i>
             </a>
         

@@ -14,11 +14,14 @@
 <meta name="author" content="罗旭" />
 
 
+    
+    
+
 
 <meta name="description" content="罗旭的博客">
 <meta property="og:type" content="website">
 <meta property="og:title" content="罗旭个人博客">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+<meta property="og:url" content="http://yoursite.com/page/3/index.html">
 <meta property="og:site_name" content="罗旭个人博客">
 <meta property="og:description" content="罗旭的博客">
 <meta name="twitter:card" content="summary">
@@ -51,11 +54,13 @@
 <link rel="stylesheet" href="/css/style.css">
 
 
+    <style> .article { opacity: 0;} </style>
+
 
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Archives | 罗旭个人博客</title>
+<title>罗旭个人博客</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -64,9 +69,9 @@
     var yiliaConfig = {
         fancybox: true,
         animate: true,
-        isHome: false,
+        isHome: true,
         isPost: false,
-        isArchive: true,
+        isArchive: false,
         isTag: false,
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
@@ -261,347 +266,80 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-react" class="article article-type-post" itemscope itemprop="blogPost">
   
+    <div class="article-meta">
+      <a href="/2016/08/18/react/" class="article-date">
+      <time datetime="2016-08-18T04:59:24.000Z" itemprop="datePublished">2016-08-18</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/18/react/">React系列之一：初识React</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="前沿"><a href="#前沿" class="headerlink" title="前沿"></a>前沿</h1><p>&emsp;&emsp;2015年是React的兴起的初期，2016年则React的辉煌阶段，在github的star数已经超过了Angular，在前端已然是半边天的角色。对于前端工程师而言，不乱在实际项目生产中使用还是作为理论研究都具有非常重要的意义。<br>&emsp;&emsp;React是一个用于构建用户界面的Javascript库，和庞大全面的Angular相比，React只专注于架构中的V，即视图。React具有三大制胜法宝，在设计的时候从性能和编写等方面作出了详细的考虑，将这些总结成React的特性，分别为：</p>
+<pre><code>- JSX语法
+- 虚拟DOM
+- 组件化
+</code></pre><h1 id="为什么操作DOM很慢"><a href="#为什么操作DOM很慢" class="headerlink" title="为什么操作DOM很慢"></a>为什么操作DOM很慢</h1><p>&emsp;&emsp;React最出彩的地方就属性能了，因为它尽量让我们避免直接操作DOM，大家都知道在访问和操作DOM的时候是很费时的，代价相对来说比较大，那为什么这么说呢？</p>
+<h2 id="不仅要避免操作DOM，还要减少访问DOM的次数"><a href="#不仅要避免操作DOM，还要减少访问DOM的次数" class="headerlink" title="不仅要避免操作DOM，还要减少访问DOM的次数"></a>不仅要避免操作DOM，还要减少访问DOM的次数</h2><p> <img src="/img/jsdom.jpg" alt="/img/jsdon.jpg"></p>
+<blockquote>
+<p>把DOM和JavaScript各自想象成一个岛屿，它们之间用收费桥梁连接。<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  –《高性能JavaScript》</p>
+</blockquote>
+<p> &emsp;&emsp;<br>&emsp;&emsp;在浏览器中，DOM和JS的实现，用的并不是同一个“东西”。在Chrome中，JS引擎是V8，而DOM和渲染则是靠WebCore库，DOM和JS是两个独立的个体。而且js执行效率相对来说比较低，不想java和c++边编译边执行。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2017/02/06/css-重点和难点/" class="archive-article-date">
-      <time datetime="2017-02-06T05:25:21.000Z" itemprop="datePublished">02-06</time>
-</a>
 
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/02/06/css-重点和难点/">css-重点和难点</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-
-          
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2017/01/25/css3-transform-transition-animation-续2/" class="archive-article-date">
-      <time datetime="2017-01-25T07:37:37.000Z" itemprop="datePublished">01-25</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/25/css3-transform-transition-animation-续2/">css3-transform-transition-animation-续2</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-
-          
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2017/01/25/css3-transform-transition-animation-续1/" class="archive-article-date">
-      <time datetime="2017-01-25T06:34:39.000Z" itemprop="datePublished">01-25</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/25/css3-transform-transition-animation-续1/">css3-transform-transition-animation(续1)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-
-          
+      
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/animation/">animation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css3/">css3</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/transform/">transform</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/transition/">transition</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JSX/">JSX</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VirtualDom/">VirtualDom</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/组件化/">组件化</a></li></ul>
     </div>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2017/01/24/css3-transform-transition-amination/" class="archive-article-date">
-      <time datetime="2017-01-24T06:26:05.000Z" itemprop="datePublished">01-24</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/24/css3-transform-transition-amination/">css3-transform,transition,animation</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/animation/">animation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css3/">css3</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/transform/">transform</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/transition/">transition</a></li></ul>
+      
+      <div class="clearfix"></div>
     </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+    
   </div>
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2017/01/23/react-高阶组件/" class="archive-article-date">
-      <time datetime="2017-01-23T06:04:59.000Z" itemprop="datePublished">01-23</time>
-</a>
 
 
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/23/react-高阶组件/">react-高阶组件</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/props/">props</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/stateless/">stateless</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/高阶组件/">高阶组件</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2017/01/22/sass之四-mixin-include-placeholder-2/" class="archive-article-date">
-      <time datetime="2017-01-22T10:11:51.000Z" itemprop="datePublished">01-22</time>
-</a>
 
 
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/22/sass之四-mixin-include-placeholder-2/">sass之四-mixin-include-placeholder(2)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/">%</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/extend/">extend</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/include/">include</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mixin/">mixin</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sass/">sass</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2017/01/21/web优化之css-sprites/" class="archive-article-date">
-      <time datetime="2017-01-21T02:19:27.000Z" itemprop="datePublished">01-21</time>
-</a>
 
 
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/21/web优化之css-sprites/">web优化之css sprites</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/image/">image</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web优化/">web优化</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2017/01/20/sass之三-mixin-include-placeholder/" class="archive-article-date">
-      <time datetime="2017-01-20T09:30:19.000Z" itemprop="datePublished">01-20</time>
-</a>
 
 
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/20/sass之三-mixin-include-placeholder/">sass之三-mixin,include, %placeholder</a>
-    </h1>
-  
 
-        <div class="article-info info-on-archive">
-          
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/include/">include</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mixin/">mixin</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sass/">sass</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2017/01/20/sass之二-sass调试/" class="archive-article-date">
-      <time datetime="2017-01-20T08:47:12.000Z" itemprop="datePublished">01-20</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/20/sass之二-sass调试/">sass之二-sass调试</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/chrome/">chrome</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/debug/">debug</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sass/">sass</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2017/01/20/sass之一-sass介绍/" class="archive-article-date">
-      <time datetime="2017-01-20T07:23:51.000Z" itemprop="datePublished">01-20</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/20/sass之一-sass介绍/">sass之一:sass介绍</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/less/">less</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mixin/">mixin</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sass/">sass</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
-  
-
-    
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/2/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
     </nav>
   
-
 </div>
       <footer id="footer">
     <div class="outer">
