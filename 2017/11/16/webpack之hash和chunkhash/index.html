@@ -15,16 +15,19 @@
 
 
 
-<meta name="description" content="罗旭的博客">
+<meta name="description" content="http://www.cnblogs.com/ihardcoder/p/5623411.html 前言文件的hash指纹通常是作为前端静态资源实现增量跟新的方案之一，Webpack是目前最流行的开源编译工具之一，我们有必要深入理解其内部的工作方式。 在webpack编译输出的配置过程中，如果要为文件加入hash，webpack提供了两个可配置项：hash和chunkhash. hash和chunk">
+<meta name="keywords" content="webpack,hash,chunkhash">
 <meta property="og:type" content="article">
 <meta property="og:title" content="webpack之hash和chunkhash">
 <meta property="og:url" content="http://yoursite.com/2017/11/16/webpack之hash和chunkhash/index.html">
 <meta property="og:site_name" content="罗旭个人博客">
-<meta property="og:description" content="罗旭的博客">
-<meta property="og:updated_time" content="2017-11-16T06:47:32.000Z">
+<meta property="og:description" content="http://www.cnblogs.com/ihardcoder/p/5623411.html 前言文件的hash指纹通常是作为前端静态资源实现增量跟新的方案之一，Webpack是目前最流行的开源编译工具之一，我们有必要深入理解其内部的工作方式。 在webpack编译输出的配置过程中，如果要为文件加入hash，webpack提供了两个可配置项：hash和chunkhash. hash和chunk">
+<meta property="og:image" content="http://yoursite.com/img/hash.png">
+<meta property="og:updated_time" content="2017-11-16T09:01:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="webpack之hash和chunkhash">
-<meta name="twitter:description" content="罗旭的博客">
+<meta name="twitter:description" content="http://www.cnblogs.com/ihardcoder/p/5623411.html 前言文件的hash指纹通常是作为前端静态资源实现增量跟新的方案之一，Webpack是目前最流行的开源编译工具之一，我们有必要深入理解其内部的工作方式。 在webpack编译输出的配置过程中，如果要为文件加入hash，webpack提供了两个可配置项：hash和chunkhash. hash和chunk">
+<meta name="twitter:image" content="http://yoursite.com/img/hash.png">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -183,7 +186,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/">%</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Concurrency/">Concurrency</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fiber-Reconcile/">Fiber Reconcile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSX/">JSX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scheduling/">Scheduling</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Stack-Reconcile/">Stack Reconcile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Virtual-DOM/">Virtual DOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VirtualDom/">VirtualDom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/animation/">animation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/api/">api</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/async/">async</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cache/">cache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/chrome/">chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css3/">css3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/defer/">defer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/etag/">etag</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/extend/">extend</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html5/">html5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/if-none-match/">if-none-match</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/image/">image</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/include/">include</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lasyman/">lasyman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/less/">less</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lifecycle/">lifecycle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mixin/">mixin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/placeholder/">placeholder</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/property/">property</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/props/">props</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/px-em-rem/">px|em|rem</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sass/">sass</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stateless/">stateless</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/transform/">transform</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/transition/">transition</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web优化/">web优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/嵩峰/">嵩峰</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/广丰/">广丰</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/江西/">江西</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组件化/">组件化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高阶组件/">高阶组件</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/">%</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Concurrency/">Concurrency</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fiber-Reconcile/">Fiber Reconcile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSX/">JSX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scheduling/">Scheduling</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Stack-Reconcile/">Stack Reconcile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Virtual-DOM/">Virtual DOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VirtualDom/">VirtualDom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/animation/">animation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/api/">api</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/async/">async</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cache/">cache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/chrome/">chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/chunkhash/">chunkhash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css3/">css3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/defer/">defer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/etag/">etag</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/extend/">extend</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hash/">hash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html5/">html5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/if-none-match/">if-none-match</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/image/">image</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/include/">include</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lasyman/">lasyman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/less/">less</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lifecycle/">lifecycle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/loader/">loader</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mixin/">mixin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/placeholder/">placeholder</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plugin/">plugin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/property/">property</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/props/">props</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/px-em-rem/">px|em|rem</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sass/">sass</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stateless/">stateless</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/transform/">transform</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/transition/">transition</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web优化/">web优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/嵩峰/">嵩峰</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/广丰/">广丰</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/江西/">江西</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组件化/">组件化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高阶组件/">高阶组件</a></li></ul>
                     </div>
                 </section>
                 
@@ -289,6 +292,10 @@
         
 
         
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/chunkhash/">chunkhash</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hash/">hash</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
+    </div>
+
         <div class="clearfix"></div>
       </div>
       
@@ -296,7 +303,25 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        
+        <p><div style="display:none;"><a href="http://www.cnblogs.com/ihardcoder/p/5623411.html" target="_blank" rel="external">http://www.cnblogs.com/ihardcoder/p/5623411.html</a></div></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>文件的hash指纹通常是作为前端静态资源实现增量跟新的方案之一，Webpack是目前最流行的开源编译工具之一，我们有必要深入理解其内部的工作方式。</p>
+<p>在webpack编译输出的配置过程中，如果要为文件加入hash，webpack提供了两个可配置项：hash和chunkhash.</p>
+<h1 id="hash和chunkhash"><a href="#hash和chunkhash" class="headerlink" title="hash和chunkhash"></a>hash和chunkhash</h1><p>首先我们看下官方文档对两者的定义<br>hash: [hash] is replaced by the hash of the compilation，hash代表的是compilation的hash值。<br>chunkhash: [chunkhash] is replaced by the hash of the chunk. chunkhash代表的是chunk的hash值。<br>chunkhash我们可以这么理解，chunk就是模块，chunkhash就是根据模块内容计算出的hash值。那么如何理解hash呢？</p>
+<h2 id="compilation"><a href="#compilation" class="headerlink" title="compilation"></a>compilation</h2><p>webpack官方文档中how to write a plugin对 compilation的详解</p>
+<blockquote>
+<p>A compilation object represents a single build of versioned assets. While running Webpack development middleware, a new compilation will be created each time a file change is detected, thus generating a new set of compiled assets. A compilation surfaces information about the present state of module resources, compiled assets, changed files, and watched dependencies.<br>compilation对象代表某个版本的资源对应的编译进程。当使用Webpack的development中间件时，每次检测到项目文件有改动就会创建一个compilation，进而能够针对改动生产全新的编译文件。compilation对象包含当前模块资源、待编译文件、有改动的文件和监听依赖的所有信息。</p>
+</blockquote>
+<p>与compilation对应的有个compiler对象，通过对比，可以帮助大家对compilation有更深入的理解。</p>
+<blockquote>
+<p>The compiler object represents the fully configured Webpack environment. This object is built once upon starting Webpack, and is configured with all operational settings including options, loaders, and plugins.</p>
+</blockquote>
+<p>compiler对象代表的是配置完备的Webpack环境。 compiler对象只在Webpack启动时构建一次，由Webpack组合所有的配置项构建生成。</p>
+<p>简单的讲，compiler对象代表的是不变的webpack环境，是针对webpack的；而compilation对象针对的是随时可变的项目文件，只要文件有改动，compilation就会被重新创建。</p>
+<p>compilation在项目中任何一个文件改动后就会被重新创建，然后webpack计算新的compilation的hash值，这个hash值便是hash</p>
+<p>如果使用hash作为编译文件的hash指纹的话，如下</p>
+<p><pre>output: {<br>        filename: ‘[name].[hash:8],js’,<br>        path: __dirname + ‘/build’<br>    }<br></pre><br>hash是compilation对象计算所得，而不是具体的项目文件计算所得。所以以上配置的编译输出文件，所有的文件名都会使用相同的hash指纹。如下：<br> <img src="/img/hash.png" alt="/img/hash.png"></p>
+<p>当然这样还是存在问题的。三个js文件</p>
+
       
     </div>
     
@@ -307,7 +332,7 @@
         <p><span>本文标题:</span><a href="/2017/11/16/webpack之hash和chunkhash/">webpack之hash和chunkhash</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">罗旭</a></p>
         <p><span>发布时间:</span>2017-11-16, 14:47:32</p>
-        <p><span>最后更新:</span>2017-11-16, 14:47:32</p>
+        <p><span>最后更新:</span>2017-11-16, 17:01:52</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/11/16/webpack之hash和chunkhash/" title="webpack之hash和chunkhash">http://yoursite.com/2017/11/16/webpack之hash和chunkhash/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/11/16/webpack之hash和chunkhash/　　作者: 罗旭" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -321,6 +346,12 @@
 
 
     <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2017/12/05/webpack之自定义插件/">
+                    webpack之自定义插件
+                </a>
+            </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
@@ -338,7 +369,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#hash和chunkhash"><span class="toc-number">2.</span> <span class="toc-text">hash和chunkhash</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#compilation"><span class="toc-number">2.1.</span> <span class="toc-text">compilation</span></a></li></ol></li></ol>
         
     </div>
     <style>
@@ -413,7 +444,9 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/2017/12/05/webpack之自定义插件/" title="上一篇: webpack之自定义插件">
+                <i class="fa fa-angle-left"></i>
+            </a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
@@ -425,7 +458,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/11/16/webpack之hash和chunkhash/">webpack之hash和chunkhash</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/16/Web优化之Web缓存知识/">Web优化之Web缓存知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/14/React-Fiber-初探/">React Fiber 初探</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/25/css3-transform-transition-animation-续2/">css3-transform-transition-animation-续2</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/25/css3-transform-transition-animation-续1/">css3-transform-transition-animation(续1)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/24/css3-transform-transition-amination/">css3-transform,transition,animation</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/23/react-高阶组件/">react-高阶组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/22/sass之四-mixin-include-placeholder-2/">sass之四-mixin-include-placeholder(2)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/21/web优化之css-sprites/">web优化之css sprites</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/20/sass之三-mixin-include-placeholder/">sass之三-mixin,include, %placeholder</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/20/sass之二-sass调试/">sass之二-sass调试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/20/sass之一-sass介绍/">sass之一:sass介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/18/css-获取css属性/">css-获取css属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/18/algorithm-LazyMan/">algorithm-LazyMan</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/18/javascript-defer和async/">javascript-defer和async</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/11/React生命周期/">React生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/11/React的四个概念/">React的四个概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/11/hexo常用命令/">hexo常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/13/css3-px-em-rem/">css3-px,em,rem</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/13/css3-placeholder/">css3-placeholder</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/22/广丰/">我的家乡－广丰</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/29/hello-world/">Hello, Welcome!</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/18/react/">React系列之一：初识React</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/12/05/webpack之自定义插件/">webpack之自定义插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/16/webpack之hash和chunkhash/">webpack之hash和chunkhash</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/16/Web优化之Web缓存知识/">Web优化之Web缓存知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/14/React-Fiber-初探/">React Fiber 初探</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/25/css3-transform-transition-animation-续2/">css3-transform-transition-animation-续2</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/25/css3-transform-transition-animation-续1/">css3-transform-transition-animation(续1)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/24/css3-transform-transition-amination/">css3-transform,transition,animation</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/23/react-高阶组件/">react-高阶组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/22/sass之四-mixin-include-placeholder-2/">sass之四-mixin-include-placeholder(2)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/21/web优化之css-sprites/">web优化之css sprites</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/20/sass之三-mixin-include-placeholder/">sass之三-mixin,include, %placeholder</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/20/sass之二-sass调试/">sass之二-sass调试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/20/sass之一-sass介绍/">sass之一:sass介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/18/css-获取css属性/">css-获取css属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/18/algorithm-LazyMan/">algorithm-LazyMan</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/18/javascript-defer和async/">javascript-defer和async</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/11/React生命周期/">React生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/11/React的四个概念/">React的四个概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/11/hexo常用命令/">hexo常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/13/css3-px-em-rem/">css3-px,em,rem</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/13/css3-placeholder/">css3-placeholder</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/22/广丰/">我的家乡－广丰</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/29/hello-world/">Hello, Welcome!</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/18/react/">React系列之一：初识React</a></li></ul>
 
 
 
