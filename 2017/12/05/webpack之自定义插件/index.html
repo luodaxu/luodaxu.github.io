@@ -15,17 +15,17 @@
 
 
 
-<meta name="description" content="罗旭的博客">
+<meta name="description" content="前言webpack已经到3版本了，功能强大，使用方便，是构建spa的必备良药，但是总归有时候需要自定义写个webpack插件，那只能去看看官方文档了，瞟了下，发现英文文档看的不是很懂，怎么办，慢慢看，毕竟官方的才是最最权威的，下面将结合自己的理解和他人文档，总结出来的，不喜勿喷，也希望错误的地方能指正出来并改正。 关于 webpack中的compiler和compilation两个概念在阅读文档后">
 <meta name="keywords" content="webpack,plugin,loader">
 <meta property="og:type" content="article">
 <meta property="og:title" content="webpack之自定义插件">
 <meta property="og:url" content="http://yoursite.com/2017/12/05/webpack之自定义插件/index.html">
 <meta property="og:site_name" content="罗旭个人博客">
-<meta property="og:description" content="罗旭的博客">
-<meta property="og:updated_time" content="2017-12-05T02:29:47.000Z">
+<meta property="og:description" content="前言webpack已经到3版本了，功能强大，使用方便，是构建spa的必备良药，但是总归有时候需要自定义写个webpack插件，那只能去看看官方文档了，瞟了下，发现英文文档看的不是很懂，怎么办，慢慢看，毕竟官方的才是最最权威的，下面将结合自己的理解和他人文档，总结出来的，不喜勿喷，也希望错误的地方能指正出来并改正。 关于 webpack中的compiler和compilation两个概念在阅读文档后">
+<meta property="og:updated_time" content="2017-12-19T07:59:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="webpack之自定义插件">
-<meta name="twitter:description" content="罗旭的博客">
+<meta name="twitter:description" content="前言webpack已经到3版本了，功能强大，使用方便，是构建spa的必备良药，但是总归有时候需要自定义写个webpack插件，那只能去看看官方文档了，瞟了下，发现英文文档看的不是很懂，怎么办，慢慢看，毕竟官方的才是最最权威的，下面将结合自己的理解和他人文档，总结出来的，不喜勿喷，也希望错误的地方能指正出来并改正。 关于 webpack中的compiler和compilation两个概念在阅读文档后">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -137,13 +137,13 @@
                 <div class="tips-box hide">
                     <div class="tips-arrow"></div>
                     <ul class="tips-inner">
-                        <li>菜单</li>
-                        <li>标签</li>
+                        <li>Menu</li>
+                        <li>Tags</li>
                         
-                        <li>友情链接</li>
+                        <li>Friends</li>
                         
                         
-                        <li>关于我</li>
+                        <li>About Me</li>
                         
                     </ul>
                 </div>
@@ -259,7 +259,7 @@
             </nav>
         </header>                
     </div>
-    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+    <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
 </nav>
       <div class="body-wrap"><article id="post-webpack之自定义插件" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -301,7 +301,136 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>webpack已经到3版本了，功能强大，使用方便，是构建spa的必备良药，但是总归有时候需要自定义写个webpack插件，那只能去看看官方文档了，瞟了下，发现英文文档看的不是很懂，怎么办，慢慢看，毕竟官方的才是最最权威的，下面将结合自己的理解和他人文档，总结出来的，不喜勿喷，也希望错误的地方能指正出来并改正。</p>
+<h1 id="关于-webpack中的compiler和compilation两个概念"><a href="#关于-webpack中的compiler和compilation两个概念" class="headerlink" title="关于 webpack中的compiler和compilation两个概念"></a>关于 webpack中的compiler和compilation两个概念</h1><p>在阅读文档后，发现compiler和compilation这两个术语出现的概率非常高，几乎所有的webpack插件都是通过这两个对象去实现的。下面我们一起先探讨下compiler和compilation两个概念。</p>
+<blockquote>
+<p>原文：<a href="https://webpack.js.org/development/how-to-write-a-plugin/" target="_blank" rel="external">https://webpack.js.org/development/how-to-write-a-plugin/</a></p>
+</blockquote>
+<p>1.compiler<br>官方的定义是</p>
+<blockquote>
+<p>The compiler object represents the fully configured webpack environment. This object is built once upon starting webpack, and is configured with all operational settings including options, loaders, and plugins. When applying a plugin to the webpack environment, the plugin will receive a reference to this compiler. Use the compiler to access the main webpack environment.</p>
+</blockquote>
+<p>翻译成中文为：</p>
+<blockquote>
+<p>compiler对象代表webpack环境所有的配置信息，这个对象在webpack启动时被构建，配置信息包含了options，loaders，和plugins。当启动一个插件到webpack环境的时候，这个插件就会接受一个compiler的参数，使用这个参数可以获取webpack的配置信息。<br>这就意味者compiler代表的就是webpack配置环境信息，可以获取到所有webpack配置内容，并且这个参数会被传进各个插件，通过这个compiler对象可以对插件进行控制管理。</p>
+</blockquote>
+<p>2.compilation<br>官方的定义是：</p>
+<blockquote>
+<p>A compilation object represents a single build of versioned assets. While running webpack development middleware, a new compilation will be created each time a file change is detected, thus generating a new set of compiled assets. A compilation surfaces information about the present state of module resources, compiled assets, changed files, and watched dependencies. The compilation also provides many callback points at which a plugin may choose to perform custom actions.</p>
+</blockquote>
+<p>翻译成中文为：</p>
+<blockquote>
+<p>compilation对象代表一个单一的版本构建的资源，在webpack运行中间件时候，每当一个文件发生改变时就会产生一个新的complation，从而产生一个新的编译后的资源集合。complation列出了很多关于当前模块资源的信息，编译后的资源信息，改动过的文件以及监听国的依赖。compilation也提供了插件需要自定义功能的回调点。</p>
+</blockquote>
+<p>这两个对象在所有的webpack插件中都是不可分割的一部分，要开发一个优秀的webpack插件必须要熟练这两个对象的意义并熟练使用。这两个对象和hash/chunkhash有密切的联系。</p>
+<h1 id="插件的基本结构"><a href="#插件的基本结构" class="headerlink" title="插件的基本结构"></a>插件的基本结构</h1><p>每个组件，插件之类豆油应该有生命周期，在某个时刻，插件的生命周期函数将会被调用，webpack也提供了一些API去让开发者去管理控制。</p>
+<pre>
+/**
+ * webpack插件开发采用'动态原型模式'
+ * 插件开发，最重要的两个对象：compiler、compilation
+ * @param options
+ * @constructor
+ */
+function MyPlugin(options) { // 根据 options 配置你的插件
+
+}
+// 我们可以在原型上添加一些方法
+MyPlugin.prototype.someFunc = function() {/*something*/}
+
+// apply方法是必须要有的，因为当我们使用一个插件时（new somePlugins({})），webpack会去寻找插件的apply方法并执行
+MyPlugin.prototype.apply = function(compiler) {
+  // compiler是什么？compiler是webpack的'编译器'引用
+
+
+  // compiler.plugin('***')和compilation.plugin('***')代表什么？
+  // document.addEventListener熟悉吧？其实是类似的
+  // compiler.plugin('***')就相当于给compiler设置了事件监听
+  // 所以compiler.plugin('compile')就代表：当编译器监听到compile事件时，我们应该做些什么
+
+  // compile（'编译器'对'开始编译'这个事件的监听）
+  compiler.plugin("compile", function(params) {
+    console.log("The compiler is starting to compile...");
+  });
+
+  // compilation（'编译器'对'编译ing'这个事件的监听）
+  compiler.plugin("compilation", function(compilation) {
+    console.log("The compiler is starting a new compilation...");
+    // 在compilation事件监听中，我们可以访问compilation引用，它是一个代表编译过程的对象引用
+    // 我们一定要区分compiler和compilation，一个代表编译器实体，另一个代表编译过程
+    // optimize('编译过程'对'优化文件'这个事件的监听)
+    compilation.plugin("optimize", function() {
+      console.log("The compilation is starting to optimize files...");
+    });
+  });
+
+  // emit（'编译器'对'生成最终资源'这个事件的监听）
+  compiler.plugin("emit", function(compilation, callback) {
+    console.log("The compilation is going to emit files...");
+
+    // compilation.chunks是块的集合（构建后将要输出的文件，即编译之后得到的结果）
+    compilation.chunks.forEach(function(chunk) {
+      // chunk.modules是模块的集合（构建时webpack梳理出的依赖，即import、require的module）
+      // 形象一点说：chunk.modules是原材料，下面的chunk.files才是最终的成品
+      chunk.modules.forEach(function(module) {
+        // module.fileDependencies就是具体的文件，最真实的资源【举例，在css中@import("reset.css")，这里的reset.css就是fileDependencie】
+        module.fileDependencies.forEach(function(filepath) {
+          // 到这一步，就可以操作源文件了
+        });
+      });
+
+      // 最终生成的文件的集合
+      chunk.files.forEach(function(filename) {
+        // source()可以得到每个文件的源码
+        var source = compilation.assets[filename].source();
+      });
+    });
+
+    // callback在最后必须调用
+    callback();
+  });
+};
+
+// 以上compiler和compilation的事件监听只是一小部分，详细API可见该链接http://www.css88.com/doc/webpack2/api/plugins/
+
+module.exports = MyPlugin;
+</pre>
+
+<h1 id="一个简单的webpack插件"><a href="#一个简单的webpack插件" class="headerlink" title="一个简单的webpack插件"></a>一个简单的webpack插件</h1><pre>
+function FileListPlugin(options) {}
+
+FileListPlugin.prototype.apply = function(compiler) {
+
+    compiler.plugin('compile', function (params) {
+       console.log('The compiler is starting to compile...');
+    });
+
+    compiler.plugin('emit', function(compilation, callback) {
+        // Create a header string for the generated file:
+        var filelist = 'In this build:\n\n';
+
+        // Loop through all compiled assets,
+        // adding a new line item for each filename.
+        for (var filename in compilation.assets) {
+            filelist += ('- '+ filename +'\n');
+        }
+
+        // Insert this list into the Webpack build as a new file asset:
+        compilation.assets['filelist.md'] = {
+            source: function() {
+                return filelist;
+            },
+            size: function() {
+                return filelist.length;
+            }
+        };
+
+        callback();
+    });
+};
+</pre>
+
+<p>这是一个简单的webpack plugin，参照<a href="https://webpack.js.org/contribute/writing-a-plugin/#example" target="_blank" rel="external">simple webpack plugin example</a></p>
+
       
     </div>
     
@@ -309,17 +438,17 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/12/05/webpack之自定义插件/">webpack之自定义插件</a></p>
-        <p><span>文章作者:</span><a href="/" title="回到主页">罗旭</a></p>
-        <p><span>发布时间:</span>2017-12-05, 10:29:08</p>
-        <p><span>最后更新:</span>2017-12-05, 10:29:47</p>
+        <p><span>Title:</span><a href="/2017/12/05/webpack之自定义插件/">webpack之自定义插件</a></p>
+        <p><span>Author:</span><a href="/" title="Back to Homepage">罗旭</a></p>
+        <p><span>Created:</span>2017-12-05, 10:29:08</p>
+        <p><span>Updated:</span>2017-12-19, 15:59:24</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/12/05/webpack之自定义插件/" title="webpack之自定义插件">http://yoursite.com/2017/12/05/webpack之自定义插件/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/12/05/webpack之自定义插件/　　作者: 罗旭" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>Full URL:</span><a class="post-url" href="/2017/12/05/webpack之自定义插件/" title="webpack之自定义插件">http://yoursite.com/2017/12/05/webpack之自定义插件/</a>
+            <span class="copy-path" data-clipboard-text="From http://yoursite.com/2017/12/05/webpack之自定义插件/　　By 罗旭" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
-            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
         </p>
     </div>
 
@@ -341,9 +470,9 @@
 </article>
 
     <div id="toc" class="toc-article">
-        <strong class="toc-title">文章目录</strong>
+        <strong class="toc-title">Contents</strong>
         
-            
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#关于-webpack中的compiler和compilation两个概念"><span class="toc-number">2.</span> <span class="toc-text">关于 webpack中的compiler和compilation两个概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#插件的基本结构"><span class="toc-number">3.</span> <span class="toc-text">插件的基本结构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#一个简单的webpack插件"><span class="toc-number">4.</span> <span class="toc-text">一个简单的webpack插件</span></a></li></ol>
         
     </div>
     <style>
@@ -357,10 +486,10 @@
         }
     </style>
 
-    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+    <input type="button" id="tocButton" value="Hide"  title="Show or Hide Table of Contents">
 
     <script>
-        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+        yiliaConfig.toc = ["Hide", "Show", !!"false"];
     </script>
 
 
@@ -418,13 +547,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/" title="Back to Homepage"><i class="fa fa-home"></i></a>
         
 
-        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/11/16/webpack之hash和chunkhash/" title="下一篇: webpack之hash和chunkhash">
+            <a href="/2017/11/16/webpack之hash和chunkhash/" title="Next: webpack之hash和chunkhash">
                 <i class="fa fa-angle-right"></i>
             </a>
         
@@ -447,14 +576,14 @@
                 2016-2017 罗旭
             </div>
             <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
             </div>
         </div>
         
             <div class="visit">
                 
                     <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        <span id="site-visit" title="Site Visitors"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
                         </span>
                     </span>
                 
@@ -463,7 +592,7 @@
                 
                 
                     <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        <span id="page-visit"  title="Page Hits"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
                         </span>
                     </span>
                 
@@ -496,9 +625,9 @@
 
 
 <div class="scroll" id="scroll">
-    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
 </div>
 <script>
     // Open in New Window
