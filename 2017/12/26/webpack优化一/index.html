@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html >
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="罗旭" />
+
+
+
+<meta name="description" content="缓存 Caching在使用webpack打包模块化应用程序的时候，通常会生成一个可部署的最终的包含虽有目标文件的/dist目录，只要讲此目录的内容部署到服务器上，客户端就能访问网站此服务器的网站及其资源。浏览器使用缓存技术，可以通过命中缓存。以降低网络流量，加快加载速度.但是在部署新版本时不更改资源的文件名，客户端可能认为它没有被更新，就会使用它的缓存版本。由于缓存的存在，当在获取新的代码时，显得">
+<meta name="keywords" content="webpack,优化,缓存">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webpack优化一">
+<meta property="og:url" content="http://yoursite.com/2017/12/26/webpack优化一/index.html">
+<meta property="og:site_name" content="罗旭个人博客">
+<meta property="og:description" content="缓存 Caching在使用webpack打包模块化应用程序的时候，通常会生成一个可部署的最终的包含虽有目标文件的/dist目录，只要讲此目录的内容部署到服务器上，客户端就能访问网站此服务器的网站及其资源。浏览器使用缓存技术，可以通过命中缓存。以降低网络流量，加快加载速度.但是在部署新版本时不更改资源的文件名，客户端可能认为它没有被更新，就会使用它的缓存版本。由于缓存的存在，当在获取新的代码时，显得">
+<meta property="og:updated_time" content="2017-12-27T05:10:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="webpack优化一">
+<meta name="twitter:description" content="缓存 Caching在使用webpack打包模块化应用程序的时候，通常会生成一个可部署的最终的包含虽有目标文件的/dist目录，只要讲此目录的内容部署到服务器上，客户端就能访问网站此服务器的网站及其资源。浏览器使用缓存技术，可以通过命中缓存。以降低网络流量，加快加载速度.但是在部署新版本时不更改资源的文件名，客户端可能认为它没有被更新，就会使用它的缓存版本。由于缓存的存在，当在获取新的代码时，显得">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="罗旭个人博客" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>webpack优化一 | 罗旭个人博客</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/me.jpeg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">罗旭</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="/luox199111@gmail.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://www.github.com/luodaxu" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa 知乎" href="https://www.zhihu.com/people/xu-luo-47" title="知乎"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/">%</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Concurrency/">Concurrency</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fiber-Reconcile/">Fiber Reconcile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSX/">JSX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scheduling/">Scheduling</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Stack-Reconcile/">Stack Reconcile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Virtual-DOM/">Virtual DOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VirtualDom/">VirtualDom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/animation/">animation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/api/">api</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/async/">async</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cache/">cache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/chrome/">chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/chunkhash/">chunkhash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css3/">css3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/defer/">defer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/etag/">etag</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/extend/">extend</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hash/">hash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html5/">html5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/if-none-match/">if-none-match</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/image/">image</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/include/">include</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lasyman/">lasyman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/less/">less</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lifecycle/">lifecycle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/loader/">loader</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mixin/">mixin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/placeholder/">placeholder</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plugin/">plugin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/property/">property</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/props/">props</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/px-em-rem/">px|em|rem</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sass/">sass</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stateless/">stateless</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/transform/">transform</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/transition/">transition</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web优化/">web优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/优化/">优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/嵩峰/">嵩峰</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/广丰/">广丰</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/江西/">江西</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组件化/">组件化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/缓存/">缓存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高阶组件/">高阶组件</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">后端 SSH2/Shiro, 前端 MKRN</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">罗旭</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/me.jpeg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">罗旭</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="/luox199111@gmail.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://www.github.com/luodaxu" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa 知乎" target="_blank" href="https://www.zhihu.com/people/xu-luo-47" title="知乎"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-webpack优化一" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/12/26/webpack优化一/" class="article-date">
+      <time datetime="2017-12-26T02:43:56.000Z" itemprop="datePublished">2017-12-26</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      webpack优化一
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/">webpack</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/优化/">优化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/缓存/">缓存</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="缓存-Caching"><a href="#缓存-Caching" class="headerlink" title="缓存 Caching"></a>缓存 Caching</h1><p>在使用webpack打包模块化应用程序的时候，通常会生成一个可部署的最终的包含虽有目标文件的/dist目录，只要讲此目录的内容部署到服务器上，客户端就能访问网站此服务器的网站及其资源。浏览器使用缓存技术，可以通过命中缓存。以降低网络流量，加快加载速度.<div style="color:red;">但是在部署新版本时不更改资源的文件名，客户端可能认为它没有被更新，就会使用它的缓存版本。由于缓存的存在，当在获取新的代码时，显得棘手。</div></p>
+<p>当然webpack肯定也会考虑到适应各种需求的场景，可以通过必要的配置，确保webpack编译声称的文件能背客户端缓存，而在文件内容变化后，能够请求到新的文件。</p>
+<h1 id="输出文件的文件名-Output-Filenames"><a href="#输出文件的文件名-Output-Filenames" class="headerlink" title="输出文件的文件名 Output Filenames"></a>输出文件的文件名 Output Filenames</h1><p>webpack配置通过使用 output.filename 进行文件名替换，可以确保浏览器获取到修改后的文。在这里有使用hash和chunkhash相关的概念.详细的区别可以看<a href="http://luodaxu.net/2017/11/16/webpack%E4%B9%8Bhash%E5%92%8Cchunkhash/" target="_blank" rel="external">这里</a>[hash] 替换可以用于在文件名中包含一个构建相关(build-specific)的 hash，但是更好的方式是使用 [chunkhash] 替换，在文件名中包含一个 chunk 相关(chunk-specific)的哈希。<br>下面来个示例：<br>使用html-webpack-plugin管理index.html</p>
+<blockquote>
+<p>webpack-demo<br> |- package.json<br> |- webpack.config.js<br> |- /dist<br> |- /src<br>&nbsp;&nbsp;|- index.js<br> |- /node-modules</p>
+</blockquote>
+<p>webpack.config.js</p>
+<pre>
+  const path = require('path');
+  const CleanWebpackPlugin = require('clean-webpack-plugin');
+  const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+  module.exports = {
+    entry: './src/index.js',
+    plugins: [
+      new CleanWebpackPlugin(['dist']),
+      new HtmlWebpackPlugin({
+       title: 'Caching'
+      })
+    ],
+    output: {
+        ilename: '[name].[chunkhash].js',
+        path: path.resolve(__dirname, 'dist')
+    }
+  };
+</pre>
+运行webpack进行打包，控制台打印出如下
+>clean-webpack-plugin: /Users/russelluo/luoxu/webpack/webpack_test1/dist has been removed.
+Hash: dc6e04f9a083f28e96e3
+Version: webpack 2.7.0
+Time: 506ms
+                       Asset       Size  Chunks             Chunk Names
+main.ff4067774e832639fd98.js    2.84 kB       0  [emitted]  main
+                  index.html  200 bytes          [emitted]  
+   [0] ./src/index.js 209 bytes {0} [built]
+Child html-webpack-plugin for "index.html":
+       [0] ./~/lodash/lodash.js 540 kB {0} [built]
+       [1] ./~/html-webpack-plugin/lib/loader.js!./~/html-webpack-plugin/default_index.ejs 538 bytes {0} [built]
+       [2] (webpack)/buildin/global.js 509 bytes {0} [built]
+       [3] (webpack)/buildin/module.js 517 bytes {0} [built]
+
+# 提取模版(Extracting Boilerplate)
+代码分离是经常来优化性能的一种方法，在webpack中内部自身提供了CommonsChunkPlugin 来用于将模块分离到单独的文件中。<div style="color:red;font-size: 24px;">然而CommonsChunkPlugin还有个很少人知道的功能，能够在每次修改后的构建过程中，将webpack的样板boilerplate和maniest提取出来，只需要通过entry配置中未用到的名称，此插件会自动将我们需要的内容提取到单独的包中。</div>
+修改webpack的配置：
+<pre>
+module.exports = {
+    entry: './src/index.js',
+    plugins: [
+        new CleanWebpackPlugin(['dist']),
+        new HtmlWebpackPlugin({
+            title: 'Code split'
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+                name: 'runtime'
+        })
+    ],
+    output: {
+        filename: '[name].[chunkhash].js',
+        path: path.resolve(__dirname, 'dist')
+    }
+}
+</pre>
+控制台此时输出：
+>clean-webpack-plugin: /Users/russelluo/luoxu/webpack/webpack_test1/dist has been removed.
+Hash: 17df37411378c36d9834
+Version: webpack 2.7.0
+Time: 440ms
+                          Asset       Size  Chunks             Chunk Names
+   main.34659e4ea92f7d7608c3.js  290 bytes       0  [emitted]  main
+runtime.b31afe01242800586eaa.js    5.98 kB       1  [emitted]  runtime
+                     index.html  278 bytes          [emitted]  
+   [0] ./src/index.js 209 bytes {0} [built]
+Child html-webpack-plugin for "index.html":
+       [0] ./~/lodash/lodash.js 540 kB {0} [built]
+       [1] ./~/html-webpack-plugin/lib/loader.js!./~/html-webpack-plugin/default_index.ejs 538 bytes {0} [built]
+       [2] (webpack)/buildin/global.js 509 bytes {0} [built]
+       [3] (webpack)/buildin/module.js 517 bytes {0} [built]
+
+这里多了个runtime的单独的包，下面我们从代码层次上分析下,没有runtime单独代码包下代码：
+<pre>
+/******/ (function(modules) { // webpackBootstrap
+/******/     // The module cache
+/******/     var installedModules = {};
+/******/
+/******/     // The require function
+/******/     function __webpack_require__(moduleId) {
+/******/
+/******/         // Check if module is in cache
+/******/         if(installedModules[moduleId]) {
+/******/             return installedModules[moduleId].exports;
+/******/         }
+/******/         // Create a new module (and put it into the cache)
+/******/         var module = installedModules[moduleId] = {
+/******/             i: moduleId,
+/******/             l: false,
+/******/             exports: {}
+/******/         };
+/******/
+/******/         // Execute the module function
+/******/         modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/         // Flag the module as loaded
+/******/         module.l = true;
+/******/
+/******/         // Return the exports of the module
+/******/         return module.exports;
+/******/     }
+/******/
+/******/
+/******/     // expose the modules object (__webpack_modules__)
+/******/     __webpack_require__.m = modules;
+/******/
+/******/     // expose the module cache
+/******/     __webpack_require__.c = installedModules;
+/******/
+/******/     // identity function for calling harmony imports with the correct context
+/******/     __webpack_require__.i = function(value) { return value; };
+/******/
+/******/     // define getter function for harmony exports
+/******/     __webpack_require__.d = function(exports, name, getter) {
+/******/         if(!__webpack_require__.o(exports, name)) {
+/******/             Object.defineProperty(exports, name, {
+/******/                 configurable: false,
+/******/                 enumerable: true,
+/******/                 get: getter
+/******/             });
+/******/         }
+/******/     };
+/******/
+/******/     // getDefaultExport function for compatibility with non-harmony modules
+/******/     __webpack_require__.n = function(module) {
+/******/         var getter = module && module.__esModule ?
+/******/             function getDefault() { return module['default']; } :
+/******/             function getModuleExports() { return module; };
+/******/         __webpack_require__.d(getter, 'a', getter);
+/******/         return getter;
+/******/     };
+/******/
+/******/     // Object.prototype.hasOwnProperty.call
+/******/     __webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/     // __webpack_public_path__
+/******/     __webpack_require__.p = "";
+/******/
+/******/     // Load entry module and return exports
+/******/     return __webpack_require__(__webpack_require__.s = 0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports) {
+
+function getComponent() {
+        var element = document.createElement('div')
+        element.innerHTML = _.join(['Hello', 'webpack'], ' ')
+        return element;
+}
+
+    document.body.appendChild(compnent())
+
+
+/***/ })
+/******/ ]);
+</pre>
+在使用runtime以后，main.js中只有很简单的
+<pre>
+webpackJsonp([0],[
+/* 0 */
+/***/ (function(module, exports) {
+
+function getComponent() {
+        var element = document.createElement('div')
+        element.innerHTML = _.join(['Hello', 'webpack'], ' ')
+        return element;
+}
+
+    document.body.appendChild(compnent())
+
+
+/***/ })
+],[0]);
+</pre>
+在runtime.js中，有一大段不是我们自己编写的代码，这部分可以认为作为webpack自身的一些功能代码。这部分也是可以作为公共代码提取出来的。
+<pre>
+/******/ (function(modules) { // webpackBootstrap
+/******/     // install a JSONP callback for chunk loading
+/******/     var parentJsonpFunction = window["webpackJsonp"];
+/******/     window["webpackJsonp"] = function webpackJsonpCallback(chunkIds, moreModules, executeModules) {
+/******/         // add "moreModules" to the modules object,
+/******/         // then flag all "chunkIds" as loaded and fire callback
+/******/         var moduleId, chunkId, i = 0, resolves = [], result;
+/******/         for(;i < chunkIds.length; i++) {
+/******/             chunkId = chunkIds[i];
+/******/             if(installedChunks[chunkId]) {
+/******/                 resolves.push(installedChunks[chunkId][0]);
+/******/             }
+/******/             installedChunks[chunkId] = 0;
+/******/         }
+/******/         for(moduleId in moreModules) {
+/******/             if(Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
+/******/                 modules[moduleId] = moreModules[moduleId];
+/******/             }
+/******/         }
+/******/         if(parentJsonpFunction) parentJsonpFunction(chunkIds, moreModules, executeModules);
+/******/         while(resolves.length) {
+/******/             resolves.shift()();
+/******/         }
+/******/         if(executeModules) {
+/******/             for(i=0; i < executeModules.length; i++) {
+/******/                 result = __webpack_require__(__webpack_require__.s = executeModules[i]);
+/******/             }
+/******/         }
+/******/         return result;
+/******/     };
+/******/
+/******/     // The module cache
+/******/     var installedModules = {};
+/******/
+/******/     // objects to store loaded and loading chunks
+/******/     var installedChunks = {
+/******/         1: 0
+/******/     };
+/******/
+/******/     // The require function
+/******/     function __webpack_require__(moduleId) {
+/******/
+/******/         // Check if module is in cache
+/******/         if(installedModules[moduleId]) {
+/******/             return installedModules[moduleId].exports;
+/******/         }
+/******/         // Create a new module (and put it into the cache)
+/******/         var module = installedModules[moduleId] = {
+/******/             i: moduleId,
+/******/             l: false,
+/******/             exports: {}
+/******/         };
+/******/
+/******/         // Execute the module function
+/******/         modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/         // Flag the module as loaded
+/******/         module.l = true;
+/******/
+/******/         // Return the exports of the module
+/******/         return module.exports;
+/******/     }
+/******/
+/******/     // This file contains only the entry chunk.
+/******/     // The chunk loading function for additional chunks
+/******/     __webpack_require__.e = function requireEnsure(chunkId) {
+/******/         var installedChunkData = installedChunks[chunkId];
+/******/         if(installedChunkData === 0) {
+/******/             return new Promise(function(resolve) { resolve(); });
+/******/         }
+/******/
+/******/         // a Promise means "currently loading".
+/******/         if(installedChunkData) {
+/******/             return installedChunkData[2];
+/******/         }
+/******/
+/******/         // setup Promise in chunk cache
+/******/         var promise = new Promise(function(resolve, reject) {
+/******/             installedChunkData = installedChunks[chunkId] = [resolve, reject];
+/******/         });
+/******/         installedChunkData[2] = promise;
+/******/
+/******/         // start chunk loading
+/******/         var head = document.getElementsByTagName('head')[0];
+/******/         var script = document.createElement('script');
+/******/         script.type = 'text/javascript';
+/******/         script.charset = 'utf-8';
+/******/         script.async = true;
+/******/         script.timeout = 120000;
+/******/
+/******/         if (__webpack_require__.nc) {
+/******/             script.setAttribute("nonce", __webpack_require__.nc);
+/******/         }
+/******/         script.src = __webpack_require__.p + "" + chunkId + "." + {"0":"34659e4ea92f7d7608c3"}[chunkId] + ".js";
+/******/         var timeout = setTimeout(onScriptComplete, 120000);
+/******/         script.onerror = script.onload = onScriptComplete;
+/******/         function onScriptComplete() {
+/******/             // avoid mem leaks in IE.
+/******/             script.onerror = script.onload = null;
+/******/             clearTimeout(timeout);
+/******/             var chunk = installedChunks[chunkId];
+/******/             if(chunk !== 0) {
+/******/                 if(chunk) {
+/******/                     chunk[1](new Error('Loading chunk ' + chunkId + ' failed.'));
+/******/                 }
+/******/                 installedChunks[chunkId] = undefined;
+/******/             }
+/******/         };
+/******/         head.appendChild(script);
+/******/
+/******/         return promise;
+/******/     };
+/******/
+/******/     // expose the modules object (__webpack_modules__)
+/******/     __webpack_require__.m = modules;
+/******/
+/******/     // expose the module cache
+/******/     __webpack_require__.c = installedModules;
+/******/
+/******/     // identity function for calling harmony imports with the correct context
+/******/     __webpack_require__.i = function(value) { return value; };
+/******/
+/******/     // define getter function for harmony exports
+/******/     __webpack_require__.d = function(exports, name, getter) {
+/******/         if(!__webpack_require__.o(exports, name)) {
+/******/             Object.defineProperty(exports, name, {
+/******/                 configurable: false,
+/******/                 enumerable: true,
+/******/                 get: getter
+/******/             });
+/******/         }
+/******/     };
+/******/
+/******/     // getDefaultExport function for compatibility with non-harmony modules
+/******/     __webpack_require__.n = function(module) {
+/******/         var getter = module && module.__esModule ?
+/******/             function getDefault() { return module['default']; } :
+/******/             function getModuleExports() { return module; };
+/******/         __webpack_require__.d(getter, 'a', getter);
+/******/         return getter;
+/******/     };
+/******/
+/******/     // Object.prototype.hasOwnProperty.call
+/******/     __webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/     // __webpack_public_path__
+/******/     __webpack_require__.p = "";
+/******/
+/******/     // on error function for async loading
+/******/     __webpack_require__.oe = function(err) { console.error(err); throw err; };
+/******/ })
+/************************************************************************/
+/******/ ([]);
+</pre>
+
+<p>将第三方库提取到单独的vendor chunk文件中，它们很少像本地代码那样频繁修改。利用客户端的长效缓存机制，可以通过命中缓存来消除请求，并减少向服务器获取资源，同时还能保证客户端代码和服务器端代码版本一致。<br>修改webpack配置如下：</p>
+<p><pre><br>module.exports = {<br>    entry: {<br>        main: ‘./src/index.js’,<br>        vendor: [‘lodash’, ‘jquery’]<br>    },<br>    plugins: [<br>        new CleanWebpackPlugin([‘dist’]),<br>        new HtmlWebpackPlugin({<br>            title: ‘Code split’<br>        }),<br>        new webpack.optimize.CommonsChunkPlugin({<br>            name: ‘vendor’<br>        }),<br>        new webpack.optimize.CommonsChunkPlugin({<br>            name: ‘runtime’<br>        })<br>    ],<br>    output: {<br>        filename: ‘[name].[chunkhash].js’,<br>        path: path.resolve(__dirname, ‘dist’)<br>    }<br>}<br></pre><br>再次运行，控制台输出：</p>
+<blockquote>
+<p>clean-webpack-plugin: /Users/russelluo/luoxu/webpack/webpack_test1/dist has been removed.<br>Hash: f76da28c17fefcd18bb6<br>Version: webpack 2.7.0<br>Time: 660ms<br>                          Asset       Size  Chunks                    Chunk Names<br> vendor.90ea04d2de7dac0f2cf9.js     541 kB       0  [emitted]  [big]  vendor<br>   main.750a6f7dd4368b454e0e.js  299 bytes       1  [emitted]         main<br>runtime.481fb272c33ce08f83b3.js    6.01 kB       2  [emitted]         runtime<br>                     index.html  355 bytes          [emitted]<br>   [0] ./~/lodash/lodash.js 540 kB {0} [built]<br>   [1] ./src/index.js 209 bytes {1} [built]<br>   [2] (webpack)/buildin/global.js 509 bytes {0} [built]<br>   [3] (webpack)/buildin/module.js 517 bytes {0} [built]<br>   [4] multi lodash 28 bytes {0} [built]<br>Child html-webpack-plugin for “index.html”:<br>       [0] ./~/lodash/lodash.js 540 kB {0} [built]<br>       [1] ./~/html-webpack-plugin/lib/loader.js!./~/html-webpack-plugin/default_index.ejs 538 bytes {0} [built]<br>       [2] (webpack)/buildin/global.js 509 bytes {0} [built]<br>       [3] (webpack)/buildin/module.js 517 bytes {0} [built]</p>
+</blockquote>
+<p>注意，引入顺序在这里很重要。CommonsChunkPlugin 的 ‘vendor’ 实例，必须在 ‘runtime’ 实例之前引入.</p>
+<h1 id="模块标识符-Module-Identifiers"><a href="#模块标识符-Module-Identifiers" class="headerlink" title="模块标识符 Module Identifiers"></a>模块标识符 Module Identifiers</h1><p>修改index.js文件，加入print.js。<br><code><br>var _ = require(‘lodash’);<br>var Print = require(‘./print’)</code></p>
+<p>function getComponent() {<br>    var element = document.createElement(‘div’)<br>    element.innerHTML = _.join([‘Hello’, ‘webpack’], ‘ ‘)<br>    element.onclick = Print.bind(null, ‘hello webpack.’);<br>    return element;<br>}</p>
+<pre><code>document.body.appendChild(compnent())
+</code></pre><p><br>我们所期待的是main bundle.js 的hash值发生变化，但是通过命令行运行发现：<br><code><br>                          Asset       Size  Chunks                    Chunk Names<br> vendor.442fed026a7f43c947ce.js     541 kB       0  [emitted]  [big]  vendor<br>   main.b5887baed02a97842103.js  550 bytes       1  [emitted]         main<br>runtime.bca7023e88d1c0389852.js    6.01 kB       2  [emitted]         runtime<br></code><br>发现所有的chunhash都变了，说好的呢，那就让我们探探究竟。</p>
+<p><div style="color:red">每个module.id会基于默认的解析顺序resolve order进行增量，也就是说当解析顺序发生变化，ID也会随之改变</div>，因此：</p>
+<ol>
+<li>main bundle会随着自身内容的改变，而发生变化。</li>
+<li>vendor bundle 会随着自身的 module.id 的修改，而发生变化。</li>
+<li>runtime bundle 会因为当前包含一个新模块的引用，而发生变化。</li>
+</ol>
+<p>关于这个hash值发生改变的问题，可以看<a href="https://zhuanlan.zhihu.com/p/32361759" target="_blank" rel="external">这里详细</a>，在这里第一个和最后一个都是符合预期的，而vendor的hash发生变化是我们要修复的，这个就不应该发生变化。</p>
+<h2 id="为什么没有修改vendor的内容，chunk-hash值却发生变化呢"><a href="#为什么没有修改vendor的内容，chunk-hash值却发生变化呢" class="headerlink" title="为什么没有修改vendor的内容，chunk hash值却发生变化呢"></a>为什么没有修改vendor的内容，chunk hash值却发生变化呢</h2><p>在上述中，删除或者新增业务代码中的模块时，vendor.js的hash偶尔会受到影响。webpack作者给出：</p>
+<blockquote>
+<p>默认情况下，模块的id是这个模块在模块数组中的索引，OccurenceOrderPlugin会将引用次数多的模块放在前面，在每次编译时模块的顺序都是一致的－－如果修改了代码时新增或者删除模块，这将会影响到所有模块的id。这样不能完全保证vendor.js的hash不受到业务代码的影响。</p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/12/26/webpack优化一/">webpack优化一</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">罗旭</a></p>
+        <p><span>发布时间:</span>2017-12-26, 10:43:56</p>
+        <p><span>最后更新:</span>2017-12-27, 13:10:01</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/12/26/webpack优化一/" title="webpack优化一">http://yoursite.com/2017/12/26/webpack优化一/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/12/26/webpack优化一/　　作者: 罗旭" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/12/05/webpack之自定义插件/">
+                    webpack之自定义插件
+                </a>
+            </div>
+        
+    </nav>
+
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#缓存-Caching"><span class="toc-number">1.</span> <span class="toc-text">缓存 Caching</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#输出文件的文件名-Output-Filenames"><span class="toc-number">2.</span> <span class="toc-text">输出文件的文件名 Output Filenames</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#模块标识符-Module-Identifiers"><span class="toc-number">3.</span> <span class="toc-text">模块标识符 Module Identifiers</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么没有修改vendor的内容，chunk-hash值却发生变化呢"><span class="toc-number">3.1.</span> <span class="toc-text">为什么没有修改vendor的内容，chunk hash值却发生变化呢</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"webpack优化一　| 罗旭个人博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/12/26/webpack优化一/" data-title="webpack优化一" data-url="http://yoursite.com/2017/12/26/webpack优化一/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"hexoluodaxu"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/12/05/webpack之自定义插件/" title="下一篇: webpack之自定义插件">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/12/26/webpack优化一/">webpack优化一</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/05/webpack之自定义插件/">webpack之自定义插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/16/webpack之hash和chunkhash/">webpack之hash和chunkhash</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/16/Web优化之Web缓存知识/">Web优化之Web缓存知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/14/React-Fiber-初探/">React Fiber 初探</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/25/css3-transform-transition-animation-续2/">css3-transform-transition-animation-续2</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/25/css3-transform-transition-animation-续1/">css3-transform-transition-animation(续1)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/24/css3-transform-transition-amination/">css3-transform,transition,animation</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/23/react-高阶组件/">react-高阶组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/22/sass之四-mixin-include-placeholder-2/">sass之四-mixin-include-placeholder(2)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/21/web优化之css-sprites/">web优化之css sprites</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/20/sass之三-mixin-include-placeholder/">sass之三-mixin,include, %placeholder</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/20/sass之二-sass调试/">sass之二-sass调试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/20/sass之一-sass介绍/">sass之一:sass介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/18/css-获取css属性/">css-获取css属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/18/algorithm-LazyMan/">algorithm-LazyMan</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/18/javascript-defer和async/">javascript-defer和async</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/11/React生命周期/">React生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/11/React的四个概念/">React的四个概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/11/hexo常用命令/">hexo常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/13/css3-px-em-rem/">css3-px,em,rem</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/13/css3-placeholder/">css3-placeholder</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/22/广丰/">我的家乡－广丰</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/29/hello-world/">Hello, Welcome!</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/18/react/">React系列之一：初识React</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 罗旭
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
