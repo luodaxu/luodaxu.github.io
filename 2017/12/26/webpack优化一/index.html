@@ -22,7 +22,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/12/26/webpack优化一/index.html">
 <meta property="og:site_name" content="罗旭个人博客">
 <meta property="og:description" content="缓存 Caching在使用webpack打包模块化应用程序的时候，通常会生成一个可部署的最终的包含虽有目标文件的/dist目录，只要讲此目录的内容部署到服务器上，客户端就能访问网站此服务器的网站及其资源。浏览器使用缓存技术，可以通过命中缓存。以降低网络流量，加快加载速度.但是在部署新版本时不更改资源的文件名，客户端可能认为它没有被更新，就会使用它的缓存版本。由于缓存的存在，当在获取新的代码时，显得">
-<meta property="og:updated_time" content="2017-12-27T05:10:01.000Z">
+<meta property="og:updated_time" content="2017-12-27T05:48:34.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="webpack优化一">
 <meta name="twitter:description" content="缓存 Caching在使用webpack打包模块化应用程序的时候，通常会生成一个可部署的最终的包含虽有目标文件的/dist目录，只要讲此目录的内容部署到服务器上，客户端就能访问网站此服务器的网站及其资源。浏览器使用缓存技术，可以通过命中缓存。以降低网络流量，加快加载速度.但是在部署新版本时不更改资源的文件名，客户端可能认为它没有被更新，就会使用它的缓存版本。由于缓存的存在，当在获取新的代码时，显得">
@@ -661,6 +661,11 @@ function getComponent() {
 <blockquote>
 <p>默认情况下，模块的id是这个模块在模块数组中的索引，OccurenceOrderPlugin会将引用次数多的模块放在前面，在每次编译时模块的顺序都是一致的－－如果修改了代码时新增或者删除模块，这将会影响到所有模块的id。这样不能完全保证vendor.js的hash不受到业务代码的影响。</p>
 </blockquote>
+<h2 id="如何解决因为业务代码造成的hash值变化"><a href="#如何解决因为业务代码造成的hash值变化" class="headerlink" title="如何解决因为业务代码造成的hash值变化"></a>如何解决因为业务代码造成的hash值变化</h2><ol>
+<li>NamedModlesPlugin: 使用模块的路径作为hash值的产生，在开发过程中</li>
+<li>HashedModuleIdsPlugin: 推荐用语生产环境构建</li>
+</ol>
+<p>没有使用NamedModlesPlugin：<br><code><br>clean-webpack-plugin: /Users/russelluo/luoxu/webpack/webpack_test1/dist has been removed.<br>Hash: 0bc11dd5c632bc6214ff<br>Version: webpack 2.7.0<br>Time: 626ms<br>                          Asset       Size  Chunks                    Chunk Names<br> vendor.429c0486f009dd34eca6.js     541 kB       0  [emitted]  [big]  vendor<br>   main.a9d4cc5758d2d321b4d4.js  441 bytes       1  [emitted]         main<br>runtime.60cbe870fea38492ab1b.js    6.01 kB       2  [emitted]         runtime<br>                     index.html  355 bytes          [emitted]<br>[Fy2T] (webpack)/buildin/global.js 509 bytes {0} [built]<br>[KJEK] (webpack)/buildin/module.js 517 bytes {0} [built]<br>[M4fF] ./~/lodash/lodash.js 540 kB {0} [built]<br>   [0] multi lodash 28 bytes {0} [built]<br>[lVK7] ./src/index.js 316 bytes {1} [built]<br>Child html-webpack-plugin for “index.html”:<br>    [Fy2T] (webpack)/buildin/global.js 509 bytes {0} [built]<br>    [KJEK] (webpack)/buildin/module.js 517 bytes {0} [built]<br>    [M4fF] ./~/lodash/lodash.js 540 kB {0} [built]<br>    [a/t9] ./~/html-webpack-plugin/lib/loader.js!./~/html-webpack-plugin/default_index.ejs 538 bytes {0} [built]<br></code><br>使用之后NamedModlesPlugin：<br><code><br>clean-webpack-plugin: /Users/russelluo/luoxu/webpack/webpack_test1/dist has been removed.<br>Hash: cde8dfda99787f002bc9<br>Version: webpack 2.7.0<br>Time: 725ms<br>                          Asset       Size  Chunks                    Chunk Names<br> vendor.429c0486f009dd34eca6.js     541 kB       0  [emitted]  [big]  vendor<br>   main.b61ce1aa38f8147c51e6.js  567 bytes       1  [emitted]         main<br>runtime.7f57b8ef1fd6b7d107db.js    6.01 kB       2  [emitted]         runtime<br>                     index.html  355 bytes          [emitted]<br>[3Di9] ./src/print.js 60 bytes {1} [built]<br>[Fy2T] (webpack)/buildin/global.js 509 bytes {0} [built]<br>[KJEK] (webpack)/buildin/module.js 517 bytes {0} [built]<br>[M4fF] ./~/lodash/lodash.js 540 kB {0} [built]<br>   [0] multi lodash 28 bytes {0} [built]<br>[lVK7] ./src/index.js 310 bytes {1} [built]<br>Child html-webpack-plugin for “index.html”:<br>    [Fy2T] (webpack)/buildin/global.js 509 bytes {0} [built]<br>    [KJEK] (webpack)/buildin/module.js 517 bytes {0} [built]<br>    [M4fF] ./~/lodash/lodash.js 540 kB {0} [built]<br>    [a/t9] ./~/html-webpack-plugin/lib/loader.js!./~/html-webpack-plugin/default_index.ejs 538 bytes {0} [built]<br></code><br>这回是好了,本文至此结束。</p>
 
       
     </div>
@@ -672,7 +677,7 @@ function getComponent() {
         <p><span>本文标题:</span><a href="/2017/12/26/webpack优化一/">webpack优化一</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">罗旭</a></p>
         <p><span>发布时间:</span>2017-12-26, 10:43:56</p>
-        <p><span>最后更新:</span>2017-12-27, 13:10:01</p>
+        <p><span>最后更新:</span>2017-12-27, 13:48:34</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/12/26/webpack优化一/" title="webpack优化一">http://yoursite.com/2017/12/26/webpack优化一/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/12/26/webpack优化一/　　作者: 罗旭" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -703,7 +708,7 @@ function getComponent() {
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#缓存-Caching"><span class="toc-number">1.</span> <span class="toc-text">缓存 Caching</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#输出文件的文件名-Output-Filenames"><span class="toc-number">2.</span> <span class="toc-text">输出文件的文件名 Output Filenames</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#模块标识符-Module-Identifiers"><span class="toc-number">3.</span> <span class="toc-text">模块标识符 Module Identifiers</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么没有修改vendor的内容，chunk-hash值却发生变化呢"><span class="toc-number">3.1.</span> <span class="toc-text">为什么没有修改vendor的内容，chunk hash值却发生变化呢</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#缓存-Caching"><span class="toc-number">1.</span> <span class="toc-text">缓存 Caching</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#输出文件的文件名-Output-Filenames"><span class="toc-number">2.</span> <span class="toc-text">输出文件的文件名 Output Filenames</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#模块标识符-Module-Identifiers"><span class="toc-number">3.</span> <span class="toc-text">模块标识符 Module Identifiers</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么没有修改vendor的内容，chunk-hash值却发生变化呢"><span class="toc-number">3.1.</span> <span class="toc-text">为什么没有修改vendor的内容，chunk hash值却发生变化呢</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何解决因为业务代码造成的hash值变化"><span class="toc-number">3.2.</span> <span class="toc-text">如何解决因为业务代码造成的hash值变化</span></a></li></ol></li></ol>
         
     </div>
     <style>
