@@ -24,7 +24,7 @@
 <meta property="og:description" content="webpack新概念webpack真的是每个月都在变化，新的概念也层出不穷，下面我们来一起了解这些看起来高大上的术语。 tree shakingtree shaking按照字面上的意识可以认为，将树剪掉不想要的枝条，就意味者一些不需要的代码不会被打包进目标文件。tree shaking首先是rollup.js提出来的概念，后来webpack也引入进来了。其中还有个类似的概念：DCE，dead co">
 <meta property="og:image" content="http://yoursite.com/img/module_relation.jpg">
 <meta property="og:image" content="http://yoursite.com/img/module_relation_e.jpg">
-<meta property="og:updated_time" content="2018-01-03T11:57:24.014Z">
+<meta property="og:updated_time" content="2018-01-03T13:11:44.295Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="webpack优化之三">
 <meta name="twitter:description" content="webpack新概念webpack真的是每个月都在变化，新的概念也层出不穷，下面我们来一起了解这些看起来高大上的术语。 tree shakingtree shaking按照字面上的意识可以认为，将树剪掉不想要的枝条，就意味者一些不需要的代码不会被打包进目标文件。tree shaking首先是rollup.js提出来的概念，后来webpack也引入进来了。其中还有个类似的概念：DCE，dead co">
@@ -331,7 +331,19 @@ module.exports = {
 <li>被不能在同一作用域的模块所共享的模块</li>
 </ol>
 <h2 id="通过例子比较webpack2-3在打包区别"><a href="#通过例子比较webpack2-3在打包区别" class="headerlink" title="通过例子比较webpack2/3在打包区别"></a>通过例子比较webpack2/3在打包区别</h2><p>各个模块之间的关系：<br><img src="/img/module_relation.jpg" alt="/img/module_relation.jpg"><br>上图中实现的是同步依赖关系，大箭头表示的是异步依赖关系。<br>根据上文中所诉的规则，webpack3会使用一种称为“局部变量提升”的方法，该方法会选择可以展开的最大的ES模块进行变量提升，会将它们和webpack的默认原函数相连接。所以它们之间的关系可以认为如下图所示：<br><img src="/img/module_relation_e.jpg" alt="/img/module_relation_e.jpg"><br>详解介绍可以<a href="https://zhuanlan.zhihu.com/p/27828233" target="_blank" rel="external">看这里</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/27980441" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/27980441</a><br><a href="https://segmentfault.com/a/1190000012600832" target="_blank" rel="external">https://segmentfault.com/a/1190000012600832</a><br><a href="https://zhuanlan.zhihu.com/p/27828233" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/27828233</a></p>
+<h2 id="如何实现这种模块加载方式"><a href="#如何实现这种模块加载方式" class="headerlink" title="如何实现这种模块加载方式"></a>如何实现这种模块加载方式</h2><p>简单：将所有的模块的代码按照引用顺序放在一个函数作用域里，然后适当的将重命名一些变量以防止变量名冲突。</p>
+<p>但是在webpack3使用这个功能，代码必须使用ES2015的模块写法，暂时不支持CommonJS模块语法原因是这种模块语法中模块是可以动态加载的，例如：</p>
+<p><pre><br>var dir = ‘./modules/‘;<br>if(Math.random() &gt; 0.5) {<br>    module.exports = require(dir + ‘foo.js’);<br>} else {<br>    module.exports = require(dir + ‘bar.js’);<br>}<br></pre><br>这种动态加载的很难分析模块之间的依赖关系及输出的变量。而 ES2015 的模块语法规定 import 和 export 关键字必须在顶层、模块路径只能用字符串字面量，这种“强制静态化”的做法使代码在编译时就能确定模块的依赖关系，以及输入和输出的变量，所以这种功能实现起来会更加简便。不过未来的webpack可能也会支持CommonJS放入模块语法。</p>
+<h2 id="为什么我的项目不起作用"><a href="#为什么我的项目不起作用" class="headerlink" title="为什么我的项目不起作用"></a>为什么我的项目不起作用</h2><p>在项目中已经配置了ModuleConcatenationPlugin，但是打包后的代码完全没有发生改变，前面说过，要使用 Scope Hoisting，你的代码必须是用 ES2015 的模块语法写的，但是大部分 NPM 中的模块仍然是 CommonJS 语法（例如 lodash），所以导致 Webpack 回退到了默认的打包方式。其他原因可能：</p>
+<ol>
+<li>使用了ProvidePlugin</li>
+<li>使用了eval()函数</li>
+<li>项目种多个entry<br>运行 Webpack 时加上 –display-optimization-bailout 参数可以得知为什么你的项目无法使用 Scope Hoisting：<blockquote>
+<p>webpack –display-optimization-bailout<br>注意这个只在production环境下使用。</p>
+</blockquote>
+</li>
+</ol>
+<p>#引用<br><a href="https://zhuanlan.zhihu.com/p/27980441" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/27980441</a><br><a href="https://segmentfault.com/a/1190000012600832" target="_blank" rel="external">https://segmentfault.com/a/1190000012600832</a><br><a href="https://zhuanlan.zhihu.com/p/27828233" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/27828233</a></p>
 
       
     </div>
@@ -343,7 +355,7 @@ module.exports = {
         <p><span>本文标题:</span><a href="/2017/12/28/webpack优化之三/">webpack优化之三</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">罗旭</a></p>
         <p><span>发布时间:</span>2017-12-28, 11:27:15</p>
-        <p><span>最后更新:</span>2018-01-03, 19:57:24</p>
+        <p><span>最后更新:</span>2018-01-03, 21:11:44</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/12/28/webpack优化之三/" title="webpack优化之三">http://yoursite.com/2017/12/28/webpack优化之三/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/12/28/webpack优化之三/　　作者: 罗旭" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -380,7 +392,7 @@ module.exports = {
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#webpack新概念"><span class="toc-number">1.</span> <span class="toc-text">webpack新概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#tree-shaking"><span class="toc-number">2.</span> <span class="toc-text">tree shaking</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#scope-hoisting"><span class="toc-number">3.</span> <span class="toc-text">scope hoisting</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Scope-Hoisting-和-Code-Splitting"><span class="toc-number">3.1.</span> <span class="toc-text">Scope Hoisting 和 Code Splitting</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通过例子比较webpack2-3在打包区别"><span class="toc-number">3.2.</span> <span class="toc-text">通过例子比较webpack2/3在打包区别</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#webpack新概念"><span class="toc-number">1.</span> <span class="toc-text">webpack新概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#tree-shaking"><span class="toc-number">2.</span> <span class="toc-text">tree shaking</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#scope-hoisting"><span class="toc-number">3.</span> <span class="toc-text">scope hoisting</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Scope-Hoisting-和-Code-Splitting"><span class="toc-number">3.1.</span> <span class="toc-text">Scope Hoisting 和 Code Splitting</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通过例子比较webpack2-3在打包区别"><span class="toc-number">3.2.</span> <span class="toc-text">通过例子比较webpack2/3在打包区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何实现这种模块加载方式"><span class="toc-number">3.3.</span> <span class="toc-text">如何实现这种模块加载方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么我的项目不起作用"><span class="toc-number">3.4.</span> <span class="toc-text">为什么我的项目不起作用</span></a></li></ol></li></ol>
         
     </div>
     <style>
