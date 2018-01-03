@@ -394,7 +394,7 @@ module.exports = {
 <li>被不能在同一作用域的模块所共享的模块</li>
 </ol>
 <h2 id="通过例子比较webpack2-3在打包区别"><a href="#通过例子比较webpack2-3在打包区别" class="headerlink" title="通过例子比较webpack2/3在打包区别"></a>通过例子比较webpack2/3在打包区别</h2><p>各个模块之间的关系：<br><img src="/img/module_relation.jpg" alt="/img/module_relation.jpg"><br>上图中实现的是同步依赖关系，大箭头表示的是异步依赖关系。<br>根据上文中所诉的规则，webpack3会使用一种称为“局部变量提升”的方法，该方法会选择可以展开的最大的ES模块进行变量提升，会将它们和webpack的默认原函数相连接。所以它们之间的关系可以认为如下图所示：<br><img src="/img/module_relation_e.jpg" alt="/img/module_relation_e.jpg"><br>详解介绍可以<a href="https://zhuanlan.zhihu.com/p/27828233" target="_blank" rel="external">看这里</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/27980441" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/27980441</a><br><a href="https://segmentfault.com/a/1190000012600832" target="_blank" rel="external">https://segmentfault.com/a/1190000012600832</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/27980441" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/27980441</a><br><a href="https://segmentfault.com/a/1190000012600832" target="_blank" rel="external">https://segmentfault.com/a/1190000012600832</a><br><a href="https://zhuanlan.zhihu.com/p/27828233" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/27828233</a></p>
 
       
     </div>
