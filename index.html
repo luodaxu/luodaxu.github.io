@@ -266,6 +266,78 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/01/03/hello-world/" class="article-date">
+      <time datetime="2018-01-03T10:29:24.070Z" itemprop="datePublished">2018-01-03</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/03/hello-world/">Hello, Welcome!</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="个人简历"><a href="#个人简历" class="headerlink" title="个人简历"></a>个人简历</h3><ul>
+<li>姓名：罗旭</li>
+<li>年龄：25</li>
+<li>性别：男</li>
+<li>兴趣：web前端</li>
+<li>邮箱：luox199111@gmail.com / luoxulive@outlook.com</li>
+<li>Github：<a href="https://www.github.com/luodaxu" target="_blank" rel="external">www.github.com/luodaxu</a></li>
+<li>擅长：<ul>
+<li>Javascript：React/ReactRouter/Redux/Webpack/ES6/jQuery</li>
+<li>Java：Spring / Hibernate</li>
+</ul>
+</li>
+</ul>
+<h1 id="欢迎大家一起探讨前后端知识！"><a href="#欢迎大家一起探讨前后端知识！" class="headerlink" title="欢迎大家一起探讨前后端知识！"></a>欢迎大家一起探讨前后端知识！</h1>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-webpack优化之三" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -296,8 +368,34 @@
       
           
         <h1 id="webpack新概念"><a href="#webpack新概念" class="headerlink" title="webpack新概念"></a>webpack新概念</h1><p>webpack真的是每个月都在变化，新的概念也层出不穷，下面我们来一起了解这些看起来高大上的术语。</p>
-<h1 id="tree-shaking"><a href="#tree-shaking" class="headerlink" title="tree shaking"></a>tree shaking</h1><p>tree shaking按照字面上的意识可以认为，将树剪掉不想要的枝条，就意味者一些不需要的代码不会被打包进目标文件。<br>tree shaking首先是rollup.js提出来的概念，后来webpack也引入进来了。其中还有个类似的概念：DCE，dead code elimination，意识就是益处无用代码。</p>
-<h1 id="scope-hoisting"><a href="#scope-hoisting" class="headerlink" title="scope hoisting"></a>scope hoisting</h1>
+<h1 id="tree-shaking"><a href="#tree-shaking" class="headerlink" title="tree shaking"></a>tree shaking</h1><p>tree shaking按照字面上的意识可以认为，将树剪掉不想要的枝条，就意味者一些不需要的代码不会被打包进目标文件。<br>tree shaking首先是rollup.js提出来的概念，后来webpack也引入进来了。其中还有个类似的概念：DCE，dead code elimination，意识就是益处无用代码。<br>但是这个webpack tree-shaking还不完善，建议用rollup.js.<br>首先，只有es6模块才能使用webpack2做静态依赖解析。因为现在大部分浏览器还不支持es6模块语法，所以我们得下载babel，利用babel对代码进行编译。正常使用Babel 6来转换，一般设置presets: [‘es2015’]。但是这种方式使用的 transform-es2015-modules-commonjs插件意味着Babel会将es6模块通过commonJs模块转换输出，然后webpack 2就不能进行tree-shaking分析了。我的办法是修改babel的设置.</p>
+<p>一个很好的webpack tree-shaking例子：<a href="http://www.imweb.io/topic/58666d57b3ce6d8e3f9f99b0" target="_blank" rel="external">http://www.imweb.io/topic/58666d57b3ce6d8e3f9f99b0</a></p>
+<h1 id="scope-hoisting"><a href="#scope-hoisting" class="headerlink" title="scope hoisting"></a>scope hoisting</h1><p>webpack3距离webpack2不到半年就发布了，跨度也比较大，但总的来说兼容性还是很好的，在这次升级中，有以下特性：</p>
+<ol>
+<li>作用域的提升(Scope Hoisting)</li>
+<li>魔法注释(Magic Comments)</li>
+</ol>
+<p>本文将主要探讨作用域的提升scope hoisting.<br>在这之前webpack打包过程中将每个模块包装在一个单独的函数闭包中，这些闭包会导致js在浏览器的执行速度很慢，并且会导致内存占用率增加，而另外打包工具rollup将所有的模块打包在一个大的闭包中。<br>这个可以通过webpack3相应的配置开启。</p>
+<pre>
+module.exports = {
+    // ...
+    plugins:[
+        // ...
+        new webpack.optimize.ModuleConcatenationPlugin()
+    ]
+    // ...
+}
+</pre>
+
+<h2 id="Scope-Hoisting-和-Code-Splitting"><a href="#Scope-Hoisting-和-Code-Splitting" class="headerlink" title="Scope Hoisting 和 Code Splitting"></a>Scope Hoisting 和 Code Splitting</h2><p>webpack核心功能之一是Code-splitting，且在webpack2也开始支持原生的ES6模块加载方案，在对于按需要家在的模块，肯定在打包过程中，形成另外的打包文件，在必要的时候才是请求，那么webpack是怎么做到code splitting的呢？<br>在webpack中不能将所有的模块直接放在同一个作用域下原因有下：</p>
+<ol>
+<li>按需加载的模块</li>
+<li>使用commonjs规范的模块</li>
+<li>被不能在同一作用域的模块所共享的模块</li>
+</ol>
+<h2 id="通过例子比较webpack2-3在打包区别"><a href="#通过例子比较webpack2-3在打包区别" class="headerlink" title="通过例子比较webpack2/3在打包区别"></a>通过例子比较webpack2/3在打包区别</h2><p>各个模块之间的关系：<br><img src="/img/module_relation.jpg" alt="/img/module_relation.jpg"><br>上图中实现的是同步依赖关系，大箭头表示的是异步依赖关系。<br>根据上文中所诉的规则，webpack3会使用一种称为“局部变量提升”的方法，该方法会选择可以展开的最大的ES模块进行变量提升，会将它们和webpack的默认原函数相连接。所以它们之间的关系可以认为如下图所示：<br><img src="/img/module_relation_e.jpg" alt="/img/module_relation_e.jpg"><br>详解介绍可以<a href="https://zhuanlan.zhihu.com/p/27828233" target="_blank" rel="external">看这里</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/27980441" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/27980441</a><br><a href="https://segmentfault.com/a/1190000012600832" target="_blank" rel="external">https://segmentfault.com/a/1190000012600832</a></p>
+
       
     </div>
     
@@ -1440,139 +1538,6 @@ FileListPlugin.prototype.apply = function(compiler) {
 
 
   
-    <article id="post-css3-transform-transition-amination" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/01/24/css3-transform-transition-amination/" class="article-date">
-      <time datetime="2017-01-24T06:26:05.000Z" itemprop="datePublished">2017-01-24</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/24/css3-transform-transition-amination/">css3-transform,transition,animation</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>CSS3提供了3动画的属性，分别是 transform, transition和animation，下面分别讲解这3个属性。</p>
-<h2 id="transform"><a href="#transform" class="headerlink" title="transform"></a>transform</h2><p>transform的3D在这里暂时不做讲解，读者如果自己有兴趣可以参考官网的讲解。</p>
-<h4 id="transform方法"><a href="#transform方法" class="headerlink" title="transform方法"></a>transform方法</h4><table>
-<thead>
-<tr>
-<th style="text-align:left">方法</th>
-<th style="text-align:left">作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">translate()</td>
-<td style="text-align:left">变动，位移</td>
-</tr>
-<tr>
-<td style="text-align:left">rotate()</td>
-<td style="text-align:left">旋转</td>
-</tr>
-<tr>
-<td style="text-align:left">scale()</td>
-<td style="text-align:left">比例</td>
-</tr>
-<tr>
-<td style="text-align:left">skew()</td>
-<td style="text-align:left">斜拉</td>
-</tr>
-<tr>
-<td style="text-align:left">matrix()</td>
-<td style="text-align:left">综合</td>
-</tr>
-</tbody>
-</table>
-<p>详细转换方法<br><img src="/img/transform/transform.png" alt=""><br>上述的translate, rotate, scale, skew方法不做详细讲解，使用也比较简单，支持百分比。下面主要讲解下matrix。</p>
-<h4 id="matrix函数"><a href="#matrix函数" class="headerlink" title="matrix函数"></a>matrix函数</h4><p>matrix函数可以实现上面的translate, rotate, scale, skew的函数，也就是说matrix函数提供了上述的全部功能。<br><img src="/img/transform/matrix-skew-scale-rotate-translate.gif" alt=""><br>理解transform中matrix()矩阵方法有利于透彻理解CSS3的transform属性，下面将将详细讲解。</p>
-<h5 id="transform-与坐标系统"><a href="#transform-与坐标系统" class="headerlink" title="transform 与坐标系统"></a>transform 与坐标系统</h5><p>使用过transform属性旋转的知道，默认是绕着中心点旋转的，这个中心点可以通过 transform-origin 属性控制，后面将会讲解。坐标系统如下图所示。<br><img src="/img/transform/matrix-1.png" alt=""></p>
-<h4 id="transform-参数"><a href="#transform-参数" class="headerlink" title="transform 参数"></a>transform 参数</h4><p>matrix支持六个参数，我们分别标记为a, b, c, d, e, f</p>
-<blockquote>
-<p>transform: matrix(a, b, c, d, e, f);</p>
-</blockquote>
-<p><img src="/img/transform/matrix-2.gif" alt=""><br>注意书写是竖着的，经过这个矩阵变换成<br><img src="/img/transform/matrix-3.gif" alt=""><br>其中 x, y 代表转化元素的坐标变量，那么<strong>ax+cy+e</strong>的意义又是什么？ 其实<strong>ax+cy+e</strong>为变换后的水平坐标<strong>bx+dy+f</strong>为变换后的垂直位置。举个例子</p>
-<blockquote>
-<p>transform(1, 0, 0, 1, 30, 30); // a=1, b=0, c=0, d=1, e=30, f=30</p>
-</blockquote>
-<p>现在假设中心点坐标为(0, 0)，即x=0, y=0，那么x坐标变化后就是ax+by+e = 1<em>0+0</em>0+30 = 30, y坐标就是bx+dy+f = 30；于是坐标从(0, 0) -&gt; (30, 30)，实际上transform: matrix(1, 0, 0, 1, 30, 30);就等同于transform: translate(30px, 30px);. 注意：translate, rotate等方法都是需要单位的，而matrix方法e, f参数的单位可以省略。<br>于是第一步总结为:</p>
-<blockquote>
-<p>transform: matrix(a, b, c, d, 水平偏移距离, 垂直偏移距离)</p>
-</blockquote>
-<h4 id="matrix矩阵与缩放，旋转以及拉伸"><a href="#matrix矩阵与缩放，旋转以及拉伸" class="headerlink" title="matrix矩阵与缩放，旋转以及拉伸"></a>matrix矩阵与缩放，旋转以及拉伸</h4><p>偏移很好理解，下面进一步讲解matrix矩阵的缩放，旋转和拉伸效果。</p>
-<ul>
-<li>缩放 scale<br>我们知道公式，克推导：<blockquote>
-<p>x’ = ax + by + e = ax + 0<em>y+0 = ax // x放大倍数<br>y’ = cx + dy + f= 0</em>x +d*y + f = dy // y放大倍数</p>
-</blockquote>
-</li>
-</ul>
-<p>总结公式为: <strong>transform: matrix(a, 0, 0, d, 0, 0)</strong><br>也就是matrix(sx, 0, 0, sy, 0, 0);，等同于scale(sx, sy);</p>
-<ul>
-<li>旋转 rotate<br>旋转相对麻烦，涉及到了角度问题，假设旋转的角度θ，我们取特殊值去求解。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">x&apos; = ax + by 表达式1</div><div class="line">y&apos; = cx + dy 表达式2</div><div class="line"></div><div class="line">取原坐标(x, 0)，则上面表达式1为x&apos;=ax, y&apos;=cx，下面旋转θ后，x&apos;=cosθx, y&apos;=-sinθx，则</div><div class="line">x&apos; = ax = cosθx</div><div class="line">y&apos; = cx = -sinθx</div><div class="line">推导出a = cosθ, c = -sinθ</div><div class="line">同理推出b = sinθ, d = cosθ</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>总结：旋转公式为<strong>transform: matrix(cosθ, sinθ, -sinθ, cosθ, 0, 0)</strong><br>但是还是推荐使用rotate函数，简介明了，毕竟要去计算。</p>
-<ul>
-<li>斜拉 skew<br>总结：旋转公式为<strong>transform: matrix(1, tan(θy),tan(θx), 1, 0, 0)</strong></li>
-</ul>
-<h4 id="如何根据实际需求使用matrix"><a href="#如何根据实际需求使用matrix" class="headerlink" title="如何根据实际需求使用matrix"></a>如何根据实际需求使用matrix</h4><p>当想使用matrix的时候无非上述四个需求不能同时满足，而使用matrix最大的难点就是计算matrix函数的参数值，下面我们通过举个例子介绍下如何计算。<br>需求：图像以 y=x 轴进行旋转<br><img src="/img/transform/matrix-4.png" alt=""><br>那如何计算参数值呢？<br>其实很简单，无非就是先在图形上假设一个坐标点(x, y)，经过变化后的坐标值为 (x’, y’)，计算出这两个的关系式不就能算出来了嘛<br>A: 小学数学，(x’, y’)和(x, y)的连线与y=kx垂直，则，</p>
-<blockquote>
-<p>(y’-y)/(x’-x) = -1/k  -&gt; ky’-ky = x’-x</p>
-</blockquote>
-<p>B: 小学数学，(x’, y’)和(x, y)的中点在y=kx上面，则，</p>
-<blockquote>
-<p>(y’+y)/2 = k * (x’+x)/2 -&gt; kx+kx’ = y+y’</p>
-</blockquote>
-<p>下面解方程，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">x&apos; = (1-k*k)/(k*k+1) *x + 2k/(k*k+1) *y;</div><div class="line">y&apos; = 2k/(k*k+1) *x + (k*k-1)/(k*k+1) *y;</div><div class="line">结合矩阵：</div><div class="line">x&apos; = ax+cy+e;</div><div class="line">y&apos; = bx+dy+f;</div></pre></td></tr></table></figure></p>
-<p>最终得到：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">a = (1-k*k)/(k*k+1);</div><div class="line">b = 2k/(k*k+1);</div><div class="line">c = 2k/(k*k+1);</div><div class="line">d = (k*k-1)/(k*k+1);</div></pre></td></tr></table></figure></p>
-<p>所以说 transform matrix也不过如此.</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/animation/">animation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css3/">css3</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/transform/">transform</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/transition/">transition</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1584,7 +1549,7 @@ FileListPlugin.prototype.apply = function(compiler) {
         <div id="footer-info">
             <div class="footer-left">
                 <i class="fa fa-copyright"></i> 
-                2016-2017 罗旭
+                2016-2018 罗旭
             </div>
             <div class="footer-right">
                 <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
